@@ -24,15 +24,16 @@ const Arrow = style.div`
   left: ${props=> props.direction === 'left' && '10px'};
   right: ${props=> props.direction === 'right' && '10px'};
 `
-const Wrapper = style.div`width: 100% `
-
+const Wrapper = style.div`width: 100%; height: 70vh; `
 const ImageContainer = style.div`
   flex: 1; 
-  display: flex;  
-  justify-content: center;`
+  height: 100%;
+  background-color: orange;`
   
 const InfoContainer = style.div``
-const Image = style.img`  height: 65%;`
+const Image = style.img`  
+  height: 65%;
+  border: 1px solid;`
 const Slide = style.div`
   display: flex;  
   align-items: center;
@@ -48,7 +49,7 @@ function Slider(props) {
      </Arrow>
      <Wrapper>
        <Slide>
-       <ImageContainer>
+          <ImageContainer>
             <Image src={favpngdress2}/>
           </ImageContainer>
           <InfoContainer>
