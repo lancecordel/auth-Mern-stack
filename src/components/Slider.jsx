@@ -26,12 +26,19 @@ const Arrow = style.div`
 `
 const Wrapper = style.div`width: 100% `
 
-const ImageContainer = style.div`flex: 1; display: flex;  height: 100vh;  
-vertical-align: middle;  justify-content: center;`
+const ImageContainer = style.div`
+  flex: 1; 
+  display: flex;  
+  justify-content: center;`
   
 const InfoContainer = style.div``
 const Image = style.img`  height: 65%;`
-const slide = style.div`display: flex;  align-items: center`
+const Slide = style.div`
+  display: flex;  
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  border: 3px solid;`
 
 function Slider(props) {
   return (
@@ -40,13 +47,15 @@ function Slider(props) {
        <FontAwesomeIcon icon={faChevronLeft}  />
      </Arrow>
      <Wrapper>
-    <ImageContainer>
-      <Image src={favpngdress2}/>
-    </ImageContainer>
-    <InfoContainer>
-
-    </InfoContainer>
+       <Slide>
+       <ImageContainer>
+            <Image src={favpngdress2}/>
+          </ImageContainer>
+          <InfoContainer>
+          </InfoContainer>
+       </Slide>
      </Wrapper>
+
      <Arrow direction='right'>
         <FontAwesomeIcon icon={faChevronRight}  />
      </Arrow>
