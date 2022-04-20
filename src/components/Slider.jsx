@@ -1,6 +1,7 @@
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import style from 'styled-components'
 import { homeslide } from '../data';
 import favpngdress1 from '../img/favpngdress1.png';
@@ -13,7 +14,7 @@ width: 100%;
 position: relative;
 height: 100vh;
 // background-color: yellow;
-// overflow: hidden`   //Hide other images in slider
+overflow: hidden;` 
 const Arrow = style.div`
 display: flex;
 align-items: center;
@@ -25,12 +26,18 @@ margin: auto;
 cursor: pointer;
 left: ${props=> props.direction === 'left' && '10px'};
 right: ${props=> props.direction === 'right' && '10px'};`
-const Title = style.h1`font-size: 60px;`
-const Description = style.p`margin-top: 50px; letter-spacing: 5px; font-size: 20px`
-const Button = style.button`margin-top: 50px;`
+const Title = style.h1`
+font-size: 60px;`
+const Description = style.p`
+margin-top: 50px; 
+letter-spacing: 5px; 
+font-size: 20px`
+const Button = style.button`
+margin-top: 50px;`
 const Wrapper = style.div`
 height: 100%; 
 display: flex;
+transition: all 800ms ease;
 transform: translateX(${(props)=>props.slide * -100}vw)`
 
 const ImageContainer = style.div`
@@ -53,15 +60,22 @@ width: 100vw;
 height: 100vh;`
 
 function Slider(props) {
-
+  const navigate = useNavigate();
   const[slide, setSlide] = useState(0);
-  function handleClick(direction){
+
+  function handleSlide(direction){
     if(direction === 'left'){ setSlide(slide > 0? slide - 1 : 2) }
     else { setSlide(slide < 2? slide + 1 :  0) } 
   }
+
+  function handleSubmit(event){
+    event.preventDefault();
+    navigate('/categories');
+  }
+
   return (
    <Container>
-     <Arrow direction='left' onClick={(e)=>handleClick('left')}>
+     <Arrow direction='left' onClick={(e)=>handleSlide('left')}>
        <FontAwesomeIcon icon={faChevronLeft}  />
      </Arrow>
      <Wrapper slide={slide}>
@@ -73,13 +87,13 @@ function Slider(props) {
                <InfoContainer>
                   <Title>{item.title}</Title>
                   <Description>{item.description}</Description>
-                  <Button>Shop Now</Button>
+                  <Button onClick={(e)=> handleSubmit(e)} >Shop Now</Button>
                </InfoContainer>
             </Slide>
             )}
      </Wrapper>
 
-     <Arrow direction='right' onClick={(e)=> handleClick('right')}>
+     <Arrow direction='right' onClick={(e)=> handleSlide('right')}>
         <FontAwesomeIcon icon={faChevronRight}  />
      </Arrow>
     </Container>

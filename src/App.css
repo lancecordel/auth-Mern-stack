@@ -1,3 +1,7 @@
-/* div{
-  border: 1px solid;
-} */
+a:visited{
+  text-decoration: none;
+}
+
+a:link{
+  text-decoration: none;
+}
