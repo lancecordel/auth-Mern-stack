@@ -13,8 +13,9 @@ display: flex;
 width: 100%;
 position: relative;
 height: 100vh;
-// background-color: yellow;
+background-color: rgba(${props => props.backgroundColor},0.2);
 overflow: hidden;` 
+
 const Arrow = style.div`
 display: flex;
 align-items: center;
@@ -26,34 +27,45 @@ margin: auto;
 cursor: pointer;
 left: ${props=> props.direction === 'left' && '10px'};
 right: ${props=> props.direction === 'right' && '10px'};`
+
 const Title = style.h1`
-font-size: 60px;`
+font-size: 60px;
+padding-top: 5vh;`
+
 const Description = style.p`
-margin-top: 50px; 
+padding-top: 6vh; 
+padding-bottom: 6vh;
 letter-spacing: 5px; 
 font-size: 20px`
+
 const Button = style.button`
-margin-top: 50px;`
+font-size: 15px;
+padding: 3vh;
+background-color: white;`
+
 const Wrapper = style.div`
 height: 100%; 
 display: flex;
 transition: all 800ms ease;
-transform: translateX(${(props)=>props.slide * -100}vw)`
+transform: translateX(${(props)=>props.slide * - 100}vw)`
 
 const ImageContainer = style.div`
 flex: 1; 
+display: flex;
 height: 100%;
-text-align: right;
+justify-content: center;
 // background-color: orange;
 // border: 3px solid;`
+
 const InfoContainer = style.div`
 flex: 1;
-;
-padding: 50px;`
+padding-top: 4vh;`
+
 const Image = style.img`  
 height: 80%;
-padding-top: 30px;
+padding-top: 60px;
 // border: 1px solid;`
+
 const Slide = style.div`
 display: flex;  
 width: 100vw;
@@ -63,9 +75,15 @@ function Slider(props) {
   const navigate = useNavigate();
   const[slide, setSlide] = useState(0);
 
+  const homeImages = [favpngdress2, favpngdress1, favpngpant1];
+  const bgColor = ['205,92,55', '134, 158, 148', 'yellow'];
+
   function handleSlide(direction){
-    if(direction === 'left'){ setSlide(slide > 0? slide - 1 : 2) }
+    if(direction === 'left'){setSlide(slide > 0 ? slide - 1 : 2)
+      console.log('slide',slide)
+    }
     else { setSlide(slide < 2? slide + 1 :  0) } 
+
   }
 
   function handleSubmit(event){
@@ -74,15 +92,15 @@ function Slider(props) {
   }
 
   return (
-   <Container>
+   <Container backgroundColor={bgColor[slide]}>
      <Arrow direction='left' onClick={(e)=>handleSlide('left')}>
        <FontAwesomeIcon icon={faChevronLeft}  />
      </Arrow>
      <Wrapper slide={slide}>
        {homeslide.map(item => 
                <Slide>
-               <ImageContainer>
-                  <Image src={item.img}/>
+               <ImageContainer >
+                  <Image src={homeImages[slide]}/>
                </ImageContainer>
                <InfoContainer>
                   <Title>{item.title}</Title>

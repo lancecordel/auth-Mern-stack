@@ -12,9 +12,11 @@ const Container = styled.div`
   padding: 10px 20px 10px 20px;
   border-bottom: 3px solid;
   height: 50px;`
+
 const Wrapper = styled.div`
   width: 100%;
   margin-top: 10px;`
+
 const Center = styled.div`
 flex: 1;`
 const Left = styled.div`
