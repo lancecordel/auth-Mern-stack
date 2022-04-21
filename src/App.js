@@ -8,6 +8,8 @@ import Navbar from './components/Navbar';
 import Slider from './components/Slider';
 import Home from './screen/Home';
 import Womens from './components/Womens';
+import Item from './components/Item';
+import Register from './components/Register';
 
 
 function App() {
@@ -22,6 +24,7 @@ function App() {
         <Route  path='/categories/womens' element={ <Womens/> } />
         <Route  path='/categories/Jewelry' element={ <Jewelry/> } />
         <Route  path='/categories/electronics' element={ <Electronics/> } />
+        <Route  path='/register/' element={ <Register/> } />
      </Routes>
       </div>
     </div>

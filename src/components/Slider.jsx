@@ -4,9 +4,9 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import style from 'styled-components'
 import { homeslide } from '../data';
-// import favpngdress1 from '../img/favpngdress1.png';
-// import favpngdress2 from '../img/favpngdress2.png';
-// import favpngpant1 from '../img/favpngpant1.png';
+import favpngdress1 from '../img/favpngdress1.png';
+import favpngdress2 from '../img/favpngdress2.png';
+import favpngpant1 from '../img/favpngpant1.png';
 
 const Container = style.div`
 display: flex;
@@ -87,7 +87,7 @@ function Slider(props) {
                <InfoContainer>
                   <Title>{item.title}</Title>
                   <Description>{item.description}</Description>
-                  <Button onClick={(e)=> handleSubmit(e)} >Shop Now</Button>
+                  <Button onClick={(e)=> handleSubmit(e)} >SHOP NOW</Button>
                </InfoContainer>
             </Slide>
             )}

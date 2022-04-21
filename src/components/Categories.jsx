@@ -24,8 +24,10 @@ justify-content: center;
 font-weight: bold;
 font-size: 20px;
 margin: 8px;
-border-radius: 9px;
-border: .5px solid;`
+border-radius: 20px;
+border: .5px solid silver;
+// box-shadow: 0 3px;
+`
 
 const Main = styled.div`
 display: flex;`

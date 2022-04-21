@@ -10,6 +10,7 @@ const Container = styled.div`
   justify-content: space-between; 
   background-color: beige; 
   padding: 10px 20px 10px 20px;
+  border-bottom: 3px solid;
   height: 50px;`
 const Wrapper = styled.div`
   width: 100%;
@@ -22,13 +23,18 @@ const Right = styled.div`
 flex: 1;`
 const Input = styled.input`
   border: 0px solid;
-  background-color: beige;`
+  background-color: white;
+  `
 const SearchContainer = styled.div`
   display: flex;  
   padding: 5px; 
   margin-right: 77px;
-  border: .5px solid grey;
-  justify-content: end;`
+  border: .5px solid silver;
+  background-color: white;
+  border-radius: 20px;
+  justify-content: end;
+  // box-shadow: 0 2px;
+  `
 const Logo = styled.div`
 font-weight: bold;
  font-size: 30px;`
