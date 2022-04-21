@@ -1,43 +1,91 @@
 
-        import React, { useEffect, useState } from 'react'
-        import axios from 'axios'
-        
-        function Categories(props){
-            const [loading, setLoading] = useState(false)
-            const [data, setData] = useState(null)
-        
-            useEffect(() => {
-                setLoading(true)
-                axios({
-                    method: 'GET',
-                    baseURL: 'http://api.fakeshop-api.com',
-                    url: '/products/getAllProducts',
-                  })
-                    .then(({ data }) => {
-                      setData(data.products)
-                    })
-                    .catch(err => console.dir(err))
-                    .finally(() => setLoading(false))
-            }, [])
-        
-            return (  
-              <section>
-                <h1>Fake Shop API response:</h1>
-                {loading && "Loading..."}
-                {!!data && data.length > 0 ? data.map((product) => {
-                    return(
-                      <article key={product.id}>
-                        <h2>name: {product.name}</h2>
-                        <p>id: {product.id}</p>
-                        <p>description: {product.description}</p>
-                        <p>brand: {product.brand}</p>
-                        <p>price: {product.price}</p>
-                        <p>category: {product.category}</p>
-                      </article>
-                    )   
-                  }):(<p>API did not provided any product, try again.</p>)
-                }
-              </section>
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom';
+// import { Route, Routes } from 'react-router-dom';
+import styled from 'styled-components';
+import Electronics from './Electronics';
+import Jewelery from './Jewelry';
+import Mens from './Mens';
+import Womens from './Womens';
+
+const Container = styled.div`
+flex: 1;
+display: flex;
+margin: 60px 30px 20px 30px ;
+justify-content: space-between;
+// border: 1px solid;`
+
+const CategoryCard = styled.div`
+flex: 1;
+display: flex;
+letter-spacing: 2px;
+justify-content: center;
+font-weight: bold;
+font-size: 20px;
+margin: 8px;
+border-radius: 9px;
+border: .5px solid;`
+
+const Main = styled.div`
+display: flex;`
+
+  function Categories(props){
+    const navigate = useNavigate();    const [loading, setLoading] = useState(false)
+    const [info, setInfo] = useState([])
+    const [electronics, setElectronics] = useState([])
+    const [mens, setMens] = useState([])
+    const [womens, setWomens] = useState([])
+    const [jewelery, setJewelery] = useState([])
+
+    async function fetchData(){
+      try{
+        const product = await axios.get("https://fakestoreapi.com/products")
+        const { data } = product;
+        // console.log(data)
+
+        const electronic = data.filter(product => product.category === 'electronics')
+        const men = data.filter(product => product.category === "men's clothing")
+        const women = data.filter(product => product.category === "women's clothing")
+        const jewels = data.filter(product => product.category === "jewelery")
+    
+        setElectronics(electronic);
+        setMens(men)
+        setWomens(women)
+        setJewelery(jewels)
+        setInfo(data);
+      } catch(err) {
+        console.error('error', err.message)
+      }
+    }
+
+    function handleClick(event){
+      const val = event.target.getAttribute('value').toLowerCase();
+      console.log('clicked',val)
+      navigate(`/categories/${val}`)
+    }
+
+    useEffect(() => {
+      // setLoading(true)
+      fetchData();
+
+    }, [])
+
+    const allCategories = ['MENS', 'WOMENS', 'ELECTRONICS', 'JEWELRY']
+
+    return (
+      <Main>
+        <Container>
+          {allCategories.map(category => {
+            return(
+              <CategoryCard value={category} onClick={(e)=>handleClick(e)}>
+                <p>{category}</p>
+              </CategoryCard>
+            )
+          })}
+        </Container>
+      </Main>  
+
             )
         }
         
