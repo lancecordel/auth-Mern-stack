@@ -31,13 +31,17 @@ router.put('/:id', verifyTokenAndAuthorization, async (req, res) => {
         ).toString();
     }
     try{
+        // update user details to a variable
         const updatedUser = await User.findByIdAndUpdate(req.params.id, { $set: req.body },{ new: true } );
+        //  show updated user details
         res.status(200).json(updatedUser);
         
     } catch (err){
         res.status(500).json(err);
     }
 })
+
+router.delete('/user', ver)
 
 // //  UPDATE WITHOUT JWT
 // router.put('/:id', (req, res) => {
