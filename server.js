@@ -8,6 +8,7 @@ const authRoute = require('./routes/auth')
 // Import routes and use
 app.use(express.json())
 app.use("/users", userRoute)
+//  authorization route
 app.use("/authorize", authRoute)
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))

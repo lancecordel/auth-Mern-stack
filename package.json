@@ -2,7 +2,7 @@
   "name": "auth-mern-stack",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
     "abbrev": "^1.1.1",
     "ansi-align": "^3.0.1",
@@ -28,6 +28,7 @@
     "color-name": "^1.1.4",
     "concat-map": "^0.0.1",
     "configstore": "^5.0.1",
+    "crypto-js": "^4.1.1",
     "crypto-random-string": "^2.0.0",
     "debug": "^3.2.7",
     "decompress-response": "^3.3.0",
@@ -136,7 +137,6 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
   },
   "repository": {
