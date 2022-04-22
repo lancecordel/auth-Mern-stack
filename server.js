@@ -7,6 +7,7 @@ const authRoute = require('./routes/auth')
 
 // Import routes and use
 app.use(express.json())
+//  main root
 app.use("/users", userRoute)
 //  authorization route
 app.use("/authorize", authRoute)

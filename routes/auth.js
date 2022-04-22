@@ -1,21 +1,26 @@
 const router = require("express").Router();
-const User = require('../models/User');
-const CryptoJS = require("crypto-js")
-const dotenv = require("dotenv");
+const User = require('../models/User'); // user schema
+const CryptoJS = require("crypto-js")   // to encrypt password
+const dotenv = require("dotenv");   // to hide important files
 dotenv.config();
 
 //  Create user
 router.post('/register', async (req, res) =>{
+    // assign new user to variable
     const newUser = new User({
+        // assign Schema properties, and capture value from form
         username: req.body.username,
         email: req.body.email,
-        //  encrypt password with crypto
+        //  take user inserted password and encrypt
         password: CryptoJS.AES.encrypt(req.body.password, process.env.CRYPTO_PHRASE).toString()
     })
     try{
+        // save new user to database
         const savedUser = await newUser.save();
+        // show new user data after saved
         res.status(200).json(savedUser);
     } catch(err) {
+        // if there is a problem, show error message
         res.status(500).json(err);
     }
 })
@@ -23,10 +28,15 @@ router.post('/register', async (req, res) =>{
 // User Login
 router.post('/login', async(req, res)=>{
     try{
-        const user = await User.findOne({ username: req.body.username });
+        //  find user, based on unique username
+        const user = await User.findOne({ 
+            username: req.body.username,
+            email: req.body.email
+        });
         if(!user){
-            res.status(401).json('Wrong username or password')
-            return;
+            //  if username doesn't coincide with email 
+            res.status(401).json('incorrect credentials')
+            return; 
         }
         // !user && res.status(401).json('Wrong username or password')
         
