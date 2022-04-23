@@ -41,7 +41,7 @@ router.put('/:id', verifyTokenAndAuthorization, async (req, res) => {
     }
 })
 
-router.delete('/user', ver)
+// router.delete('/user', ver)
 
 // //  UPDATE WITHOUT JWT
 // router.put('/:id', (req, res) => {
