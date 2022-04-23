@@ -3,7 +3,7 @@ const User = require('../models/User'); // user schema
 const CryptoJS = require("crypto-js")   // to encrypt password
 const jsonWebToken = require('jsonwebtoken');
 const dotenv = require("dotenv");   // to hide important files
-const { json } = require("express");
+// const { json } = require("express");
 dotenv.config();
 
 //  Create user
