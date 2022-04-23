@@ -6,27 +6,6 @@ const dotenv = require("dotenv");   // to hide important files
 // const { json } = require("express");
 dotenv.config();
 
-//  Create user
-router.post('/register', async (req, res) =>{
-    // assign new user to variable
-    const newUser = new User({
-        // assign Schema properties, and capture value from form
-        username: req.body.username,
-        email: req.body.email,
-        //  take user inserted password and encrypt
-        password: CryptoJS.AES.encrypt(req.body.password, process.env.CRYPTO_PHRASE).toString()
-    })
-    try{
-        // save new user to database
-        const savedUser = await newUser.save();
-        // show new user data after saved
-        res.status(200).json(savedUser);
-    } catch(err) {
-        // if there is a problem, show error message
-        res.status(500).json(err);
-    }
-})
-
 // User Login
 router.post('/login', async(req, res)=>{
     try{
@@ -41,7 +20,6 @@ router.post('/login', async(req, res)=>{
             res.status(401).json('incorrect credentials')
             return;     //  if validations fails, exit block to prevent server crash
         }
-        // !user && res.status(401).json('Wrong username or password')
         
         //  Decrypt with phrase saved into the ENV file
         const encryptedPassword = CryptoJS.AES.decrypt(user.password, process.env.CRYPTO_PHRASE);
@@ -57,7 +35,7 @@ router.post('/login', async(req, res)=>{
             isAdmin: user.isAdmin,
         }, 
         process.env.JWT_KEY,
-        {expiresIn: "2d"}
+        {expiresIn: "3d"}
         );
         //  destructure user object
         const { password, ...nonPasswordItems } = user._doc;
