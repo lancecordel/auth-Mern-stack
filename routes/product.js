@@ -50,7 +50,7 @@ router.delete('/:id', verifyTokenAndAdmin, async (req, res) =>{
 
 } )
 
-//  Need admin permission fo find a Product-----------------------------------------------------------
+//  find a Product by id -----------------------------------------------------------
 router.get('/find/:id', async (req, res) =>{
     try{
         const product = await Product.findById(req.params.id);
@@ -61,19 +61,19 @@ router.get('/find/:id', async (req, res) =>{
       }
 })
 
-//  FIND ALL USERS-------------------------------------------------------------------------------------
-// router.get('/find/', verifyTokenAndAdmin, async (req, res) =>{
-//     try{
-//         const user = await User.find();
-//         if(!user){
-//             res.status(404).json('User Not Found!');
-//             return;
-//         }
-//         res.status(200).json(user)
-//     } catch (err) {
-//         res.status(404).json('USER NOT FOUND', err.message)
-//     }
+//  FIND ALL PRODUCTS -------------------------------------------------------------------------------------
+router.get('/', verifyTokenAndAdmin, async (req, res) =>{
+    try{
+        const user = await User.find();
+        if(!user){
+            res.status(404).json('User Not Found!');
+            return;
+        }
+        res.status(200).json(user)
+    } catch (err) {
+        res.status(404).json('USER NOT FOUND', err.message)
+    }
 
-// })
+})
 
 module.exports = router;

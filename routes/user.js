@@ -68,19 +68,24 @@ router.get('/find/:id', verifyTokenAndAdmin, async (req, res) =>{
 })
 
 //  FIND ALL USERS-------------------------------------------------------------------------------------
-router.get('/find/', verifyTokenAndAdmin, async (req, res) =>{
-    try{
-        const user = await User.find();
-        if(!user){
-            res.status(404).json('User Not Found!');
-            return;
-        }
-        res.status(200).json(user)
-    } catch (err) {
-        res.status(404).json('USER NOT FOUND', err.message)
-    }
+// router.get('/find/byname/:name', verifyTokenAndAdmin, async (req, res) =>{
+//     try{
+//         const query = req.params;
 
-})
+//         //  all query that match input. sort by _id. limit of 1. ELSE just find all 
+//         // const user = query? await User.find().sort({_id: -1}).limit(1) : await User.find();
+//         const user = await User.findOne(username:{`${query}`});
+//         // const {password, ...otherProperties} = user._doc;
+//         if(!user){
+//             res.status(404).json('User Not Found!');
+//             return;
+//         }
+//         res.status(200).json(user)
+//     } catch (err) {
+//         res.status(404).json(err.message)
+//     }
+
+// })
 
 // //  FIND BY USERNAME ------------------------------------------------------------------------
 // router.get('/find/name', verifyTokenAndAdmin, async (req, res) =>{
