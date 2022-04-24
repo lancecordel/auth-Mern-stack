@@ -12,7 +12,7 @@ router.post('/', verifyTokenAndAdmin, async (req, res) =>{
     // assign new user to variable
     const newProduct = new Product(req.body)
     try{
-        // save new user to database
+        // save new product to database
         const savedProduct = await newProduct.save();
         // show new user data after saved
         res.status(200).json(savedProduct);
@@ -63,13 +63,14 @@ router.get('/find/:id', async (req, res) =>{
 
 //  FIND ALL PRODUCTS -------------------------------------------------------------------------------------
 router.get('/', verifyTokenAndAdmin, async (req, res) =>{
+    const queryCategory = req.query.category;
     try{
-        const user = await User.find();
-        if(!user){
+        const products = await Product.find();
+        if(!product){
             res.status(404).json('User Not Found!');
             return;
         }
-        res.status(200).json(user)
+        res.status(200).json(product)
     } catch (err) {
         res.status(404).json('USER NOT FOUND', err.message)
     }
