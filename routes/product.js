@@ -31,7 +31,6 @@ router.put('/:id', verifyTokenAndAdmin, async (req, res) => {
         //  show updated product details
         if(!updatedProduct) return;
         res.status(200).json({updatedProduct});
-        
     }
  catch (err){
         res.status(404).json('PRODUCT NOT FOUND');
@@ -61,20 +60,20 @@ router.get('/find/:id', async (req, res) =>{
       }
 })
 
-//  FIND ALL PRODUCTS -------------------------------------------------------------------------------------
-router.get('/', verifyTokenAndAdmin, async (req, res) =>{
+//  FIND PRODUCTS By QUERY Category-------------------------------------------------------------------------------------
+router.get('/', async (req, res) =>{
     const queryCategory = req.query.category;
     try{
-        const products = await Product.find();
-        if(!product){
-            res.status(404).json('User Not Found!');
-            return;
+        let products;
+        if(queryCategory){
+            products = await Product.find({ category: { $in: [ queryCategory ] } })
+        } else {
+            products = await Product.find()
         }
-        res.status(200).json(product)
+        res.status(200).json(products)
     } catch (err) {
         res.status(404).json('USER NOT FOUND', err.message)
     }
-
 })
 
 module.exports = router;

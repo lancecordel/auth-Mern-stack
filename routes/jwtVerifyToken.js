@@ -10,11 +10,11 @@ const jwtVerifyToken = (req, res, next) => {
     if(authorizationHeader){
         //  remove the space between "Bearer" and "TOKEN number". this is the second element in the header.
         const token = authorizationHeader.split(" ")[1];
-        //  verify method,     evaluate token   return error OR userData 
+        //  verify method(),     evaluate token   return error OR userData 
         jsonWebToken.verify(token, process.env.JWT_KEY, (err, user) => {
             //  if error
             if(err) res.status(403).json('This Token is not valid!');
-            // if ok, user dat
+            // if ok, user data
             req.user = user;
             // leave function and continue in router
             next();
