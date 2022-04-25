@@ -70,4 +70,35 @@ router.get('/', verifyTokenAndAdmin, async (req, res) =>{
     }
 })
 
+// get monthly sales
+router.get("/sales", verifyTokenAndAdmin, async(req, res) => {
+    const date = new Date();
+    //  Month Prior to current month.
+    const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
+    //  And the Month before that
+    const previousMonth = new Date(date.setMonth(lastMonth.getMonth() - 1));
+    try{
+        const income = await Order.aggregate([
+            //  get any date matching this statement
+            { $match: { createdAt: { $gte: previousMonth } } },
+            {
+                $project: {
+                    month: { $month: "$createdAt" },
+                    sales: "$amount",
+                    }
+            },
+                {
+                    //  get properties list above
+                    $group: {
+                        _id: "$month",
+                        total: { $sum: "$sales" },
+                    }
+                }
+        ]);
+        res.status(200).json(income)
+    } catch(err) {
+        res.status(500).json('There Was a Date error', err.message)
+    }
+} )
+
 module.exports = router;
