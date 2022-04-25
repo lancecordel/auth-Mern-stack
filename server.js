@@ -18,8 +18,8 @@ app.use("/users", userRoute)
 app.use("/authorize", authRoute)
 
 app.use("/products", prodRoute)
-app.use("/cart", cartRoute)
-app.use("/order", orderRoute)
+app.use("/carts", cartRoute)
+app.use("/orders", orderRoute)
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 
