@@ -8,7 +8,7 @@ dotenv.config();
 //  Crud operations for products
 
 //  Create product
-router.post('/', verifyTokenAndAdmin, async (req, res) =>{
+router.post('/admin', async (req, res) =>{
     // assign new user to variable
     const newProduct = new Product(req.body)
     try{

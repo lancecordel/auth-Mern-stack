@@ -107,8 +107,9 @@ function Admin() {
       price: input.price
     }
     // console.log(input)
-    await axios.post('/authorize/products/admin', newProduct);
-
+    await axios.post('/products/admin', newProduct);
+    // const response = await axios.get('/');
+    // console.log(response)
   }
 
 

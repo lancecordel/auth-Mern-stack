@@ -30,7 +30,7 @@ function App() {
         <Route  path='/categories/electronics' element={ <Electronics/> } />
         <Route  path='/users/register' element={ user? <Slider/> : <Register/> } />
         <Route  path='/authorize/login' element={ user? <Slider/> : <Login/> } />
-        <Route  path='/authorize/products/admin' element={ <Admin/> } />
+        <Route  path='/products/admin' element={ <Admin/> } />
      </Routes>
       </div>
     </div>

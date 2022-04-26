@@ -63,6 +63,11 @@ function Navbar() {
     // console.log('clicked',val)
     navigate(`/authorize/${val}`)
   }
+  function handleAdminClick(event){
+    const val = event.target.getAttribute('value').toLowerCase();
+    // console.log('clicked',val)
+    navigate(`/products/${val}`)
+  }
   function handleRegisterClick(event){
     const val = event.target.getAttribute('value').toLowerCase();
     // console.log('clicked',val)
@@ -87,7 +92,7 @@ function Navbar() {
             <MenuItemContainer>
               <MenuItem onClick={(e)=>handleSignInClick(e)} value={'login'} >SIGN IN</MenuItem>
               <MenuItem onClick={(e)=>handleRegisterClick(e)} value={'register'} >REGISTER</MenuItem>
-              <MenuItem onClick={(e)=>handleSignInClick(e)} value={'admin'} >ADMIN</MenuItem>
+              <MenuItem onClick={(e)=>handleAdminClick(e)} value={'admin'} >ADMIN</MenuItem>
               <FontAwesomeIcon icon={faShoppingCart} />
             </MenuItemContainer>
           </Right>

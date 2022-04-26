@@ -1,7 +1,7 @@
 const express = require('express');
 const db = require('./db')
 const app = express();
-const PORT = 5000 || process.env.PORT
+const PORT = 300 || process.env.PORT
 const userRoute = require('./routes/user')
 const authRoute = require('./routes/auth')
 const prodRoute = require('./routes/product')
