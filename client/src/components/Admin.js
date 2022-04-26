@@ -65,15 +65,23 @@ width: 100%;
 align-Items: center;
 `
 
-function Register() {
+function Admin() {
 
   const [username, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [size, setsize] = useState('');
+  const [color, setcolor] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState('');
+  const [price, setPrice] = useState('');
   const [input, setInput] = useState({
-    username: '',
-    email: '',
-    password: ''
+    category: '',
+    size: '',
+    color: '',
+    title: '',
+    description: '',
+    image: '',
+    price: '',
   });
   
 
@@ -89,43 +97,39 @@ function Register() {
 
   const handleSubmitClick = async(e) => {
     e.preventDefault();
-    const newUser = {
-      username: input.username,
-      email: input.email,
-      password: input.password
+    const newProduct = {
+      category: input.category,
+      size: input.size,
+      color: input.color,
+      title: input.title,
+      description: input.description,
+      image: input.image,
+      price: input.price
     }
-
-    axios.post('/users/register', newUser)
+    // console.log(input)
+    await axios.post('/authorize/products/admin', newProduct);
 
   }
 
-  console.log(email)
 
   return (
     <Container background={favpngregister}>
         <RegisterDiv>
           <TitleDiv>
-            <Title>CREATE AN ACCOUNT</Title>
+            <Title>MANAGE INVENTORY</Title>
           </TitleDiv>
           <Form>
-                <Input type='text' name='username' placeholder='username' value={input.username} onChange={handleChange} />
-                <Input type='text' name='email' placeholder='email' value={input.email} onChange={handleChange} />
-                <Input type='password' name='password' placeholder='password' value={input.password} onChange={handleChange} />
-                <RegisterButton onClick={handleSubmitClick} >REGISTER</RegisterButton>
+                <Input type='text' name='category' placeholder='category' value={input.category} onChange={handleChange} />
+                <Input type='text' name='size' placeholder='size' value={input.size} onChange={handleChange} />
+                <Input type='text' name='color' placeholder='color' value={input.color} onChange={handleChange} />
+                <Input type='text' name='title' placeholder='title' value={input.title} onChange={handleChange} />
+                <Input type='text' name='description' placeholder='description' value={input.description} onChange={handleChange} />
+                <Input type='text' name='price' placeholder='price' value={input.price} onChange={handleChange} />
+                <RegisterButton onClick={handleSubmitClick} >ADD INVENTORY</RegisterButton>
             </Form>
-
-                <TermsDiv>
-                <Terms>
-                      I Agree to the terms and conditions of this site persuant
-                      to the PRIVACY POLICY 
-                      &nbsp;&nbsp;&nbsp;&nbsp;
-                      <input type='checkbox' />
-                  </Terms>
-                </TermsDiv>
-
         </RegisterDiv>
     </Container>
   )
 }
 
-export default Register
+export default Admin

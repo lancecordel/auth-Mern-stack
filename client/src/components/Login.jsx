@@ -20,8 +20,8 @@ display: flex;
 align-items: center;
 flex-direction: column;
 justify-content: flex-start;
-background-color: rgba(255,255,255,0.5);
-width: 390px;
+background-color: rgba(255,255,255,0.7);
+width: 590px;
 // height: 200px;
 // padding: 20px;
 // border: 1px solid blue;
@@ -53,72 +53,57 @@ margin: 15px 0 15px 0;
 background-color: rgba(6, 26, 239, .7);
 border-radius: 7px;
 `
+const Form = styled.form`
+display: flex;
+flex-direction: column;
+padding: 10px 0 0 0;
+width: 100%;
+align-Items: center;
+`
 
 function Login() {
-  const [userName, setUserName] = useState('');
+  const [username, setUserName] = useState({});
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState('');
   const [error, setError] = useState(false);
+  const [input, setInput] = useState({
+    username: '',
+    email: '',
+    password: ''
+  });
+  
+  // function handleChange(e){
+  //   const {name, value} = e.target;
+  //   setInput(prevInput => {
+  //     return {
+  //       ...prevInput,
+  //       [name]: value
+  //     }
+  //   })
+  // }
+
 
   const submitHandler = async(e) => {
     e.preventDefault();
-    try{
 
-      // var axios = require('axios');
-      // var data = JSON.stringify({
-      //     "collection": "users",
-      //     "database": "shop",
-      //     "dataSource": "Cluster0",
-      //     "projection": {
-      //         "_id": 1
-      //     }
-      // });
-                  
-      // var config = {
-      //     method: 'post',
-      //     url: 'https://data.mongodb-api.com/app/data-sjhoa/endpoint/data/beta/action/findOne',
-      //     headers: {
-      //         'Content-Type': 'application/json',
-      //         'Access-Control-Request-Headers': '*',
-      //         'api-key': '<API_KEY>'
-      //     },
-      //     data : data
-      // };
-                  
-      // axios(config)
-      //     .then(function (response) {
-      //         console.log(JSON.stringify(response.data));
-      //     })
-      //     .catch(function (error) {
-      //         console.log(error);
-      //     });
-      
-
-      const config = {
-        headers: {
-          "Content-type": "app1cation/json"
-        }
-      }
-      setLoading(true)
-      const { data } = await axios.post('authorize/login',
-      {
-        userName,
-        password,
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
       },
-      config
-    );
-    const item = localStorage.setItem('userInfo', JSON.stringify(data))
-      console.log(item)
-
-      setLoading(false)
-    
-  } 
-    catch(err){
-      setError(err.response.data.message)
-
     }
-    console.log(userName, password)
+    const { data } = await axios.post("/authorize/login", {
+      username,
+      email,
+      password
+      
+    })
+
+
+
+
+
+
   }
 
   return (
@@ -127,11 +112,14 @@ function Login() {
           <TitleDiv>
             <Title>SIGN IN</Title>
           </TitleDiv>
-                <Input type='text' placeholder='username' value={userName} onChange={(e)=> setUserName(e.target.value)} />
-                <Input type='text' placeholder='email' value={email} onChange={(e)=> setEmail(e.target.value)} />
-                <Input type='text' placeholder='password' value={password} onChange={(e)=>setPassword(e.target.value)} />
-                <SignInButton onClick={(e)=>submitHandler(e)} >SIGN IN</SignInButton>
+          <Form>
+                <Input type='text' name='username' placeholder='username' value={input.username} onChange={(e)=>setUserName(e.target.value)} />
+                <Input type='text' name='email'  placeholder='email' value={input.email} onChange={(e)=>setEmail(e.target.value)} />
+                <Input type='text' name='password' placeholder='password' value={input.password} onChange={(e)=>setPassword(e.target.value)} />
+                <SignInButton onClick={submitHandler} >SIGN IN</SignInButton>
                 {/* {console.log(userName, password)} */}
+          </Form>
+
   
                 <TermsDiv>
 
@@ -142,3 +130,54 @@ function Login() {
 }
 
 export default Login
+
+// var axios = require('axios');
+// var data = JSON.stringify({
+//     "collection": "users",
+//     "database": "shop",
+//     "dataSource": "Cluster0",
+//     "projection": {
+//         "_id": 1
+//     }
+// });
+            
+// var config = {
+//     method: 'post',
+//     url: 'https://data.mongodb-api.com/app/data-sjhoa/endpoint/data/beta/action/findOne',
+//     headers: {
+//         'Content-Type': 'application/json',
+//         'Access-Control-Request-Headers': '*',
+//         'api-key': '0gzyMue6VeONxxdWRTwVDLQtw5EFicz26YLtnHtzo3dwEJ6CsFDULdVibuNeVEVc'
+//     },
+//     data : data
+// };
+            
+// axios(config)
+//     .then(function (response) {
+//         console.log(JSON.stringify(response.data));
+//     })
+//     .catch(function (error) {
+//         console.log(error);
+//     });
+
+
+//     // console.log(input)
+//     //POST request with body equal on data in JSON format
+//     const data = {}
+
+//   await fetch('/authorize/login', {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json',
+//   },
+//   body: JSON.stringify(),
+// })
+// .then((response) => response.json())
+// //Then with the data from the response in JSON...
+// .then((data) => {
+//   console.log('Success:', console);
+// })
+// //Then with the error genereted...
+// .catch((error) => {
+//   console.error('Error:', error);
+// });

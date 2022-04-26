@@ -58,10 +58,15 @@ const linkStyle = {
 function Navbar() {
   const navigate = useNavigate();
 
-  function handleClick(event){
+  function handleSignInClick(event){
     const val = event.target.getAttribute('value').toLowerCase();
     // console.log('clicked',val)
     navigate(`/authorize/${val}`)
+  }
+  function handleRegisterClick(event){
+    const val = event.target.getAttribute('value').toLowerCase();
+    // console.log('clicked',val)
+    navigate(`/users/${val}`)
   }
 
   return (
@@ -80,8 +85,9 @@ function Navbar() {
           </Center>
           <Right>
             <MenuItemContainer>
-              <MenuItem onClick={(e)=>handleClick(e)} value={'login'} >SIGN IN</MenuItem>
-              <MenuItem onClick={(e)=>handleClick(e)} value={'register'} >REGISTER</MenuItem>
+              <MenuItem onClick={(e)=>handleSignInClick(e)} value={'login'} >SIGN IN</MenuItem>
+              <MenuItem onClick={(e)=>handleRegisterClick(e)} value={'register'} >REGISTER</MenuItem>
+              <MenuItem onClick={(e)=>handleSignInClick(e)} value={'admin'} >ADMIN</MenuItem>
               <FontAwesomeIcon icon={faShoppingCart} />
             </MenuItemContainer>
           </Right>

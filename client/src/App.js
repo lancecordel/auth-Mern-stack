@@ -6,11 +6,12 @@ import Jewelry from './components/Jewelry';
 import Mens from './components/Mens';
 import Navbar from './components/Navbar';
 import Slider from './components/Slider';
-// import Home from './screen/Home';
 import Womens from './components/Womens';
 import Item from './components/Item';
 import Register from './components/Register';
 import Login from './components/Login';
+import Admin from './components/Admin';
+
 
 function App() {
   const user = false;
@@ -27,8 +28,9 @@ function App() {
         <Route  path='/categories/womens' element={ <Womens/> } />
         <Route  path='/categories/Jewelry' element={ <Jewelry/> } />
         <Route  path='/categories/electronics' element={ <Electronics/> } />
-        <Route  path='/register' element={ user? <Slider/> : <Register/> } />
+        <Route  path='/users/register' element={ user? <Slider/> : <Register/> } />
         <Route  path='/authorize/login' element={ user? <Slider/> : <Login/> } />
+        <Route  path='/authorize/products/admin' element={ <Admin/> } />
      </Routes>
       </div>
     </div>
