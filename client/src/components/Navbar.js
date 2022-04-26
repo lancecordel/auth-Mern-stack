@@ -8,9 +8,10 @@ const Container = styled.div`
   display: flex; 
   align-items: center;
   justify-content: space-between; 
-  background-color: beige; 
+  // background-color: beige; 
   padding: 10px 20px 10px 20px;
-  border-bottom: 3px solid;
+  // border-bottom: 3px solid gold;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, .2);
   height: 50px;`
 
 const Wrapper = styled.div`
@@ -60,7 +61,7 @@ function Navbar() {
   function handleClick(event){
     const val = event.target.getAttribute('value').toLowerCase();
     // console.log('clicked',val)
-    navigate(`/${val}`)
+    navigate(`/authorize/${val}`)
   }
 
   return (

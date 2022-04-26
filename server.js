@@ -5,8 +5,10 @@ const PORT = 5000 || process.env.PORT
 const userRoute = require('./routes/user')
 const authRoute = require('./routes/auth')
 const prodRoute = require('./routes/product')
-const orderRoute = require('./routes/order')
-const cartRoute = require('./routes/cart')
+const cors = require('cors');
+app.use(cors());
+// const orderRoute = require('./routes/order')
+// const cartRoute = require('./routes/cart')
 
 // Import routes and use
 app.use(express.json())
@@ -18,8 +20,8 @@ app.use("/users", userRoute)
 app.use("/authorize", authRoute)
 
 app.use("/products", prodRoute)
-app.use("/carts", cartRoute)
-app.use("/orders", orderRoute)
+// app.use("/carts", cartRoute)
+// app.use("/orders", orderRoute)
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'))
 

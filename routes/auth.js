@@ -14,6 +14,7 @@ router.post('/login', async(req, res)=>{
             username: req.body.username,
             email: req.body.email
         });
+        console.log(user)
 
         if(!user){
             //  if username doesn't coincide with email 

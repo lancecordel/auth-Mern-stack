@@ -28,7 +28,7 @@ function App() {
         <Route  path='/categories/Jewelry' element={ <Jewelry/> } />
         <Route  path='/categories/electronics' element={ <Electronics/> } />
         <Route  path='/register' element={ user? <Slider/> : <Register/> } />
-        <Route  path='/login' element={ user? <Slider/> : <Login/> } />
+        <Route  path='/authorize/login' element={ user? <Slider/> : <Login/> } />
      </Routes>
       </div>
     </div>
