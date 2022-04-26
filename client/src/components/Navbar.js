@@ -1,7 +1,7 @@
 import { faMagnifyingGlass, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { NavLink, Route, Routes } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -55,6 +55,14 @@ const linkStyle = {
 
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  function handleClick(event){
+    const val = event.target.getAttribute('value').toLowerCase();
+    // console.log('clicked',val)
+    navigate(`/${val}`)
+  }
+
   return (
     <Wrapper>
         <Container>
@@ -71,8 +79,8 @@ function Navbar() {
           </Center>
           <Right>
             <MenuItemContainer>
-              <MenuItem>SIGN IN</MenuItem>
-              <MenuItem>REGISTER</MenuItem>
+              <MenuItem onClick={(e)=>handleClick(e)} value={'login'} >SIGN IN</MenuItem>
+              <MenuItem onClick={(e)=>handleClick(e)} value={'register'} >REGISTER</MenuItem>
               <FontAwesomeIcon icon={faShoppingCart} />
             </MenuItemContainer>
           </Right>

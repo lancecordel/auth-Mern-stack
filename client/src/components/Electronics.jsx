@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Categories from './Categories'
 import styled from 'styled-components';
+import ItemCard from './ItemCard';
 
 const Container = styled.div`
 // flex: 1;
@@ -66,16 +67,18 @@ function Electronics() {
             {/* <Wrapper> */}
             { electronics.map(item => {
                 return(
-                    <ImageDiv>
-                        <Img src={item.image} />
+                  <ImageDiv>
+                    <ItemCard 
+                        image={item.image} 
+                        title={item.title}
+                        price={item.price} 
+                        id={item.id} />
                     </ImageDiv>
                 )
             })
         }
-            {/* </Wrapper> */}
 
         </Container>
-        <h1>Womens Page</h1>
     </div>
   )
 }

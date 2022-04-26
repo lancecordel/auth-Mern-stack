@@ -1,8 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Categories from './Categories'
 import styled from 'styled-components';
+import ItemCard from './ItemCard';
+
 
 const Container = styled.div`
 // flex: 1;
@@ -21,25 +23,30 @@ height: 70%;
 // border: 1px solid;`
 
 const ImageDiv = styled.div`
-flex: 1;
+// flex: 1;
 display: flex;
 justify-content: center;
 padding: 10px;
 // border: 1px solid;
 // width: 30%;
-height: 80%;`
+height: 70%;`
 
-const Wrapper = styled.div`
-display: flex;
-flex-wrap: wrap;
-justify-content: space-around;
-width: 90%;
-border: 3px solid;`
 
 function Mens() {
-    const navigate = useNavigate();    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate();    
+    const [loading, setLoading] = useState(false)
     const [info, setInfo] = useState([])
     const [mens, setMens] = useState([])
+
+    const params = useParams();
+
+    function handleClick(event){
+      const val = event.target.getAttribute('value').toLowerCase();
+      console.log('clicked',val)
+      console.log('use Params Clicked', params)
+      // navigate(`/categories/${val}`)
+    }
+
 
     async function fetchData(){
       try{
@@ -58,6 +65,7 @@ function Mens() {
     }
     useEffect(()=> {
         fetchData();
+        console.log("loading")
     },[])
     console.log(mens)
 
@@ -65,17 +73,18 @@ function Mens() {
     <div>
         <Categories />
         <Container>
-            {/* <Wrapper> */}
             { mens.map(item => {
                 return(
                     <ImageDiv>
-                        <Img src={item.image} />
+                        <ItemCard 
+                        image={item.image} 
+                        title={item.title}
+                        price={item.price}
+                        id={item.id} />
                     </ImageDiv>
                 )
             })
         }
-            {/* </Wrapper> */}
-
         </Container>
     </div>
   )

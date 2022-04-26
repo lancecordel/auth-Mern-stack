@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Categories from './Categories'
 import styled from 'styled-components';
+import ItemCard from './ItemCard';
 
 const Container = styled.div`
 // flex: 1;
@@ -21,7 +22,7 @@ height: 70%;
 // border: 1px solid;`
 
 const ImageDiv = styled.div`
-flex: 1;
+// flex: 1;
 display: flex;
 justify-content: center;
 padding: 10px;
@@ -29,15 +30,9 @@ padding: 10px;
 // width: 30%;
 height: 80%;`
 
-const Wrapper = styled.div`
-display: flex;
-flex-wrap: wrap;
-justify-content: space-around;
-width: 90%;
-border: 3px solid;`
-
 function Womens() {
-    const navigate = useNavigate();    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate();    
+    const [loading, setLoading] = useState(false)
     const [info, setInfo] = useState([])
     const [womens, setWomens] = useState([])
 
@@ -63,19 +58,20 @@ function Womens() {
     <div>
         <Categories />
         <Container>
-            {/* <Wrapper> */}
             { womens.map(item => {
                 return(
-                    <ImageDiv>
-                        <Img src={item.image} />
+                  <ImageDiv>
+                    <ItemCard 
+                        image={item.image} 
+                        title={item.title}
+                        price={item.price}
+                        id={item.id} />
+                      
                     </ImageDiv>
                 )
             })
         }
-            {/* </Wrapper> */}
-
         </Container>
-        <h1>Womens Page</h1>
     </div>
   )
 }

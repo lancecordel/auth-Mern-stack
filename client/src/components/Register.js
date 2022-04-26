@@ -19,8 +19,8 @@ align-items: center;
 flex-direction: column;
 justify-content: space-between;
 background-color: rgba(255,255,255,0.5);
-width: 290px;
-height: 300px;
+width: 390px;
+// height: 350px;
 // padding: 20px;
 border: 1px solid blue;
 `
@@ -43,7 +43,18 @@ text-align: center;
 background-color: rgba(6, 26, 239, .3);
 `
 const Input = styled.input`
-margin: 5px;`
+padding: 4px;
+margin: 5px;
+width: 70%;
+`
+const RegisterButton = styled.button`
+color: white;
+padding: 9px;
+border: .5px solid black;
+margin: 15px 0 15px 0;
+background-color: rgba(6, 26, 239, .5);
+border-radius: 7px;
+`
 
 function Register() {
   return (
@@ -57,6 +68,7 @@ function Register() {
                 <Input type='text' placeholder='email'/>
                 <Input type='text' placeholder='username'/>
                 <Input type='text' placeholder='password'/>
+                <RegisterButton>REGISTER</RegisterButton>
                 <TermsDiv>
                 <Terms>
                       I Agree to the terms and conditions of this site persuant

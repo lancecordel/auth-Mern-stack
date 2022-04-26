@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 // import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import Electronics from './Electronics';
@@ -78,9 +78,9 @@ display: flex;`
     return (
       <Main>
         <Container>
-          {allCategories.map(category => {
+          {allCategories.map((category, index) => {
             return(
-              <CategoryCard value={category} onClick={(e)=>handleClick(e)}>
+              <CategoryCard key={index} value={category} onClick={(e)=>handleClick(e)}>
                 <p>{category}</p>
               </CategoryCard>
             )
