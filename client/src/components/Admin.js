@@ -96,7 +96,7 @@ function Admin() {
     })
   }
 
-  const handleSubmitClick = (e) => {
+  const handleSubmitClick = async(e) => {
     e.preventDefault();
     const newProduct = {
       category: input.category,
@@ -107,8 +107,17 @@ function Admin() {
       image: input.image,
       price: input.price
     }
+
+    await axios.post('/items', newProduct);
+
     // console.log(input)
-    axios('/admin/items').then(res => setItem(res.data.item)).catch(console.error);
+    //     axios({
+    //     // url: `http://localhost:3000/api/items`,
+    //     url: `${apiUrl}/items`,
+    //     method: 'POST',
+    //     data: item
+    // }).then(res => setCreatedItem(res.data.item)).catch(console.error)
+    // .then(res => setItem(res.data.item)).catch(console.error);
     // const response = await axios.get('/');
     // console.log(response)
   }

@@ -99,7 +99,7 @@ function Navbar(props) {
   function handleAdminClick(event){
     const val = event.target.getAttribute('value').toLowerCase();
     // console.log('clicked',val)
-    navigate(`/admin/${val}`)
+    navigate(`/${val}`)
   }
   function handleRegisterClick(event){
     const val = event.target.getAttribute('value').toLowerCase();

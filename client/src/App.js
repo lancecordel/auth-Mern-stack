@@ -31,8 +31,8 @@ function App() {
         <Route  path='/categories/electronics' element={ <Electronics/> } />
         <Route  path='/users/register' element={ user? <Slider/> : <Register/> } />
         <Route  path='/authorize/login' element={ user? <Slider/> : <Login/> } />
-        <Route  path='/admin/items' element={ <Admin/> } />
-        <Route  path='/results' element={ <SearchResults/> } />
+        <Route  path='/items' element={ <Admin/> } />
+        {/* <Route  path='/results' element={ <SearchResults/> } /> */}
      </Routes>
       </div>
     </div>

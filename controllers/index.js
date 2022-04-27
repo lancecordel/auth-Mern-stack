@@ -1,5 +1,5 @@
 // const { del } = require('express/lib/application')
-const Item = require('../models/Product')
+const Product = require('../models/Product')
 
 const createItem = async (req, res) => {
     try {
