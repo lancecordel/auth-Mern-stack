@@ -16,11 +16,6 @@ width: 95vw;
 height: 90vh;
 margin: 20px;`
 
-const Img = styled.img`
-// flex: 1;
-height: 70%;
-// border: 1px solid;`
-
 const ImageDiv = styled.div`
 // flex: 1;
 display: flex;
@@ -28,7 +23,7 @@ justify-content: center;
 padding: 10px;
 // border: 1px solid;
 // width: 30%;
-height: 80%;`
+height: 100%;`
 
 function Womens() {
     const navigate = useNavigate();    

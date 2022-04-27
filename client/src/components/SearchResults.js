@@ -15,6 +15,7 @@ justify-content: center;
 width: 95vw;
 height: 90vh;
 margin: 20px;
+margin-top: 50px;
 `
 
 const ImageDiv = styled.div`
@@ -23,37 +24,20 @@ display: flex;
 justify-content: center;
 padding: 10px;
 // border: 1px solid;
-// width: 30%;
-height: 60%;`
+// width: 10%;
+height: 60%;
+`
 
-const Wrapper = styled.div`
-display: flex;
-flex-wrap: wrap;
-justify-content: space-around;
-width: 90%;
-border: 3px solid;`
-
-function Electronics() {
-    const navigate = useNavigate();    const [loading, setLoading] = useState(false)
+function SearchResults(props) {
+    const navigate = useNavigate();    
     const [info, setInfo] = useState([])
-    const [electronics, setElectronics] = useState([])
+    const [results, setResults] = useState([])
+    console.log(props.results)
 
-    async function fetchData(){
-      try{
-        const product = await axios.get("https://fakestoreapi.com/products")
-        const { data } = product;
-        // console.log(data)
 
-        const electronic = data.filter(product => product.category === "electronics")
-    
-        setElectronics(electronic)
-        setInfo(data);
-      } catch(err) {
-        console.error('error', err.message)
-      }
-    }
+
+
     useEffect(()=> {
-        fetchData();
     },[])
 
   return (
@@ -61,7 +45,7 @@ function Electronics() {
         <Categories />
         <Container>
             {/* <Wrapper> */}
-            { electronics.map(item => {
+            { props.results.map(item => {
                 return(
                   <ImageDiv>
                     <ItemCard 
@@ -73,10 +57,12 @@ function Electronics() {
                 )
             })
         }
+            {/* </Wrapper> */}
 
         </Container>
+        <h1>Womens Page</h1>
     </div>
   )
 }
 
-export default Electronics
+export default SearchResults

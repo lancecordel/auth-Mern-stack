@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import styled from 'styled-components';
-import favpngregister from '../img/favpngregister.png'
+import favadmin from '../img/favadmin.png'
 
 const Container = styled.div`
 flex: 1;
@@ -11,7 +11,7 @@ justify-content: center;
 width: 100vw;
 height: 100vh;
 // border: 1px solid;
-background-image: linear-gradient(rgba(255,255,255,0.5),rgba(6, 26, 239,0.5)), url(${favpngregister});
+background-image: linear-gradient(rgba(255,255,255,0.5),rgba(255, 255, 255,0.5)), url(${favadmin});
 background-size: cover;
 `
 const RegisterDiv = styled.div`
@@ -19,8 +19,8 @@ display: flex;
 align-items: center;
 flex-direction: column;
 justify-content: space-between;
-background-color: rgba(255,255,255,0.7);
-width: 590px;
+background-color: rgba(255,255,255,0.6);
+width: 250px;
 // height: 350px;
 // padding: 20px;
 border: 1px solid blue;
@@ -74,6 +74,7 @@ function Admin() {
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
   const [price, setPrice] = useState('');
+  const [item, setItem] = useState('');
   const [input, setInput] = useState({
     category: '',
     size: '',
@@ -95,7 +96,7 @@ function Admin() {
     })
   }
 
-  const handleSubmitClick = async(e) => {
+  const handleSubmitClick = (e) => {
     e.preventDefault();
     const newProduct = {
       category: input.category,
@@ -107,14 +108,14 @@ function Admin() {
       price: input.price
     }
     // console.log(input)
-    await axios.post('/products/admin', newProduct);
+    axios('/admin/items').then(res => setItem(res.data.item)).catch(console.error);
     // const response = await axios.get('/');
     // console.log(response)
   }
 
 
   return (
-    <Container background={favpngregister}>
+    <Container background={favadmin}>
         <RegisterDiv>
           <TitleDiv>
             <Title>MANAGE INVENTORY</Title>

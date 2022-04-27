@@ -18,11 +18,6 @@ margin: 20px;
 margin-top: 50px;
 `
 
-const Img = styled.img`
-// flex: 1;
-height: 70%;
-// border: 1px solid;`
-
 const ImageDiv = styled.div`
 flex: 1;
 display: flex;
@@ -30,15 +25,8 @@ justify-content: center;
 padding: 10px;
 // border: 1px solid;
 // width: 10%;
-height: 40%;
+height: 60%;
 `
-
-// const Wrapper = styled.div`
-// display: flex;
-// flex-wrap: wrap;
-// justify-content: space-around;
-// width: 90%;
-// border: 3px solid;`
 
 function Jewelry() {
     const navigate = useNavigate();    const [loading, setLoading] = useState(false)

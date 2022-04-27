@@ -11,8 +11,7 @@ justify-content: center;
 width: 100vw;
 height: 100vh;
 // border: 1px solid;
-// background-image: linear-gradient(rgba(255,255,255,0.5),rgba(239, 6, 6,0.5)), url(${favpngregister});
-background-image: linear-gradient(rgba(255,255,255,0.5),rgba(255, 255, 255,0.5)), url(${favpngregister});
+background-image: linear-gradient(rgba(255,255,255,0.6),rgba(255, 255, 255,0.6)), url(${favpngregister});
 background-size: cover;
 `
 const RegisterDiv = styled.div`
@@ -20,7 +19,7 @@ display: flex;
 align-items: center;
 flex-direction: column;
 justify-content: flex-start;
-background-color: rgba(255,255,255,0.7);
+background-color: rgba(255,255,255,0.6);
 width: 590px;
 // height: 200px;
 // padding: 20px;

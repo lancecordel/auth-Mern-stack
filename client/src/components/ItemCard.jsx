@@ -2,19 +2,22 @@ import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 
 const Img = styled.img`
-flex: 1;
-height: 70%;
+// flex: 1;
+// height: ;
+width: 70%
 // border: 1px solid;
 `
 const ImageDiv = styled.div`
 flex: 1;
 display: flex;
 flex-direction: column;
-justify-content: center;
+align-items: center;
+justify-content: space-between;
 padding: 10px;
 // border: 1px solid;
+max-width: 400px;
 // width: 30%;
-height: 80%;
+height: 90%;
 `
 const ItemTitle = styled.div`
 display: flex;
@@ -23,6 +26,7 @@ justify-content: center;
 text-align: center;
 `
 const Price = styled.div`
+flex: 1
 display: flex;
 flex-direction:column;
 justify-content: flex-start;

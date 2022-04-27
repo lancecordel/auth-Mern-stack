@@ -11,6 +11,7 @@ import Item from './components/Item';
 import Register from './components/Register';
 import Login from './components/Login';
 import Admin from './components/Admin';
+import SearchResults from './components/SearchResults';
 
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
         <Route  path='/categories/electronics' element={ <Electronics/> } />
         <Route  path='/users/register' element={ user? <Slider/> : <Register/> } />
         <Route  path='/authorize/login' element={ user? <Slider/> : <Login/> } />
-        <Route  path='/products/admin' element={ <Admin/> } />
+        <Route  path='/admin/items' element={ <Admin/> } />
+        <Route  path='/results' element={ <SearchResults/> } />
      </Routes>
       </div>
     </div>

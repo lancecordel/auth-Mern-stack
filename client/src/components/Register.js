@@ -2,6 +2,8 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import styled from 'styled-components';
 import favpngregister from '../img/favpngregister.png'
+import favregister from '../img/favregister.png';
+
 
 const Container = styled.div`
 flex: 1;
@@ -11,7 +13,8 @@ justify-content: center;
 width: 100vw;
 height: 100vh;
 // border: 1px solid;
-background-image: linear-gradient(rgba(255,255,255,0.5),rgba(6, 26, 239,0.5)), url(${favpngregister});
+background-image: linear-gradient(rgba(255,255,255,0.9),rgba(255, 255, 255,0.7)), url(${favregister});
+// background-image: linear-gradient(rgba(255,255,255,0.8),rgba(255, 240, 255,0.8));
 background-size: cover;
 `
 const RegisterDiv = styled.div`
@@ -19,7 +22,7 @@ display: flex;
 align-items: center;
 flex-direction: column;
 justify-content: space-between;
-background-color: rgba(255,255,255,0.7);
+background-color: rgba(255,255,255,0.9);
 width: 590px;
 // height: 350px;
 // padding: 20px;
@@ -54,7 +57,7 @@ color: white;
 padding: 9px;
 border: .5px solid black;
 margin: 15px 0 15px 0;
-background-color: rgba(6, 26, 239, .7);
+background-color: rgba(6, 26, 239, .5);
 border-radius: 7px;
 `
 const Form = styled.form`

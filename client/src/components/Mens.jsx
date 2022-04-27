@@ -14,7 +14,7 @@ align-items: center;
 justify-content: center;
 // border: 6px solid;
 width: 95vw;
-height: 90vh;
+// height: 90vh;
 margin: 20px;`
 
 const Img = styled.img`

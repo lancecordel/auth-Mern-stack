@@ -1,8 +1,12 @@
 import { faMagnifyingGlass, faShoppingCart } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import ItemCard from './ItemCard'
+import SearchResults from './SearchResults'
+
 
 const Container = styled.div`
   display: flex; 
@@ -12,7 +16,8 @@ const Container = styled.div`
   padding: 10px 20px 10px 20px;
   // border-bottom: 3px solid gold;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, .2);
-  height: 50px;`
+  // height: 50px;
+  `
 
 const Wrapper = styled.div`
   width: 100%;
@@ -26,16 +31,21 @@ const Right = styled.div`
 flex: 1;`
 const Input = styled.input`
   border: 0px solid;
+  width: 90%;
+  // padding: 0 0 10px;
+  height: 15px;
   background-color: white;
   `
 const SearchContainer = styled.div`
+
   display: flex;  
-  padding: 5px; 
+  padding: 0px 10px 0; 
+  align-items: center;
+  justify-content: center;
   margin-right: 77px;
   border: .5px solid silver;
   background-color: white;
   border-radius: 20px;
-  justify-content: end;
   // box-shadow: 0 2px;
   `
 const Logo = styled.div`
@@ -48,6 +58,19 @@ const MenuItemContainer= styled.div`
   // border: 1px solid;
   justify-content: space-between;`
 
+  const Results = styled.div`
+  display: flex;
+
+  width: 100%;
+  // height: 100%;
+  // padding: 200px 30px 0 30px;
+  background-color: rgba(255, 255, 255, 0);
+  z-index: 3;
+  `
+  const ResultItem = styled.div`
+  padding: 10px;
+  `
+
 const linkStyle = {
     margin: "1rem",
     textDecoration: "none",
@@ -55,8 +78,18 @@ const linkStyle = {
   };
 
 
-function Navbar() {
+function Navbar(props) {
+  const[searchItem, setSearchItem] = useState();
   const navigate = useNavigate();
+
+  async function handleSearch(e){
+    const query = e.target.value;
+    const product = await axios.get("https://fakestoreapi.com/products")
+    const { data } = product;
+    const queryItem = data.filter(item => item.description.includes(query));
+    setSearchItem(e.target.value !== '' ? queryItem : []);
+    // console.log (e.target.getAttribute('value'));
+  }
 
   function handleSignInClick(event){
     const val = event.target.getAttribute('value').toLowerCase();
@@ -66,7 +99,7 @@ function Navbar() {
   function handleAdminClick(event){
     const val = event.target.getAttribute('value').toLowerCase();
     // console.log('clicked',val)
-    navigate(`/products/${val}`)
+    navigate(`/admin/${val}`)
   }
   function handleRegisterClick(event){
     const val = event.target.getAttribute('value').toLowerCase();
@@ -83,21 +116,34 @@ function Navbar() {
             </NavLink>
           </Left>
           <Center>
-          <SearchContainer>
-              <Input  /> &nbsp; &nbsp; &nbsp;
+          <SearchContainer >
+              <Input onChange={(e)=>handleSearch(e)} /> &nbsp; &nbsp; &nbsp;
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </SearchContainer>
           </Center>
           <Right>
-            <MenuItemContainer>
+            <MenuItemContainer >
               <MenuItem onClick={(e)=>handleSignInClick(e)} value={'login'} >SIGN IN</MenuItem>
               <MenuItem onClick={(e)=>handleRegisterClick(e)} value={'register'} >REGISTER</MenuItem>
-              <MenuItem onClick={(e)=>handleAdminClick(e)} value={'admin'} >ADMIN</MenuItem>
+              <MenuItem onClick={(e)=>handleAdminClick(e)} value={'items'} >ADMIN</MenuItem>
               <FontAwesomeIcon icon={faShoppingCart} />
             </MenuItemContainer>
           </Right>
         </Container>
+        <Results>
+        { typeof searchItem !== 'undefined'?  
+            <ResultItem>
+              {searchItem.map(item => {
+                return(
+                  <img src={item.image} height={'200'}/>
+                )
+              })}
+            </ResultItem>  
+         : ''  } 
+        </Results>
+
     </Wrapper>
+    
 
   )
 }
