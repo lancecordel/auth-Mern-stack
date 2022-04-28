@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import favpngregister from '../img/favpngregister.png'
 import favregister from '../img/favregister.png';
@@ -69,10 +70,12 @@ align-Items: center;
 `
 
 function Register() {
+  const navigate = useNavigate();
 
   const [username, setUserName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [createUser, setCreateUser] = useState('');
   const [input, setInput] = useState({
     username: '',
     email: '',
@@ -97,12 +100,18 @@ function Register() {
       email: input.email,
       password: input.password
     }
+    // console.log('before axios',createUser)
 
-    axios.post('/users/register', newUser)
-
+   await axios.post('http://localhost:3000/users/register', newUser)
+   setCreateUser(newUser);
   }
+  useEffect(() => {
+    if(createUser){ 
+      console.log('after axios',createUser)
+      // navigate('/');
+     }
 
-  console.log(email)
+  },[createUser, navigate])
 
   return (
     <Container background={favpngregister}>

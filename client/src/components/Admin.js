@@ -78,11 +78,11 @@ function Admin() {
   const [input, setInput] = useState({
     category: '',
     size: '',
-    color: '',
-    title: '',
-    description: '',
-    image: '',
-    price: '',
+    // color: '',
+    // title: '',
+    // description: '',
+    // image: '',
+    // price: '',
   });
   
 
@@ -101,22 +101,22 @@ function Admin() {
     const newProduct = {
       category: input.category,
       size: input.size,
-      color: input.color,
-      title: input.title,
-      description: input.description,
-      image: input.image,
-      price: input.price
+      // color: input.color,
+      // title: input.title,
+      // description: input.description,
+      // image: input.image,
+      // price: input.price
     }
 
-    await axios.post('/items', newProduct);
+    await axios.post('http://localhost:3000/admin/items', newProduct);
 
     // console.log(input)
     //     axios({
     //     // url: `http://localhost:3000/api/items`,
-    //     url: `${apiUrl}/items`,
+    //     url: `/items`,
     //     method: 'POST',
-    //     data: item
-    // }).then(res => setCreatedItem(res.data.item)).catch(console.error)
+    //     data: newProduct,
+    // }).then(res => setInput(res.data.newProduct)).catch(console.error)
     // .then(res => setItem(res.data.item)).catch(console.error);
     // const response = await axios.get('/');
     // console.log(response)
@@ -135,7 +135,7 @@ function Admin() {
                 <Input type='text' name='color' placeholder='color' value={input.color} onChange={handleChange} />
                 <Input type='text' name='title' placeholder='title' value={input.title} onChange={handleChange} />
                 <Input type='text' name='description' placeholder='description' value={input.description} onChange={handleChange} />
-                <Input type='text' name='price' placeholder='price' value={input.price} onChange={handleChange} />
+                <Input type='number' name='price' placeholder='price' value={input.price} onChange={handleChange} />
                 <RegisterButton onClick={handleSubmitClick} >ADD INVENTORY</RegisterButton>
             </Form>
         </RegisterDiv>

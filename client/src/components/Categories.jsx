@@ -12,7 +12,7 @@ import Womens from './Womens';
 const Container = styled.div`
 flex: 1;
 display: flex;
-margin: 60px 30px 20px 30px ;
+margin: 110px 30px 20px 30px ;
 justify-content: space-between;
 // border: 1px solid;`
 
@@ -33,6 +33,7 @@ const Main = styled.div`
 display: flex;`
 
   function Categories(props){
+    const {name} = useParams();
     const navigate = useNavigate();    const [loading, setLoading] = useState(false)
     const [info, setInfo] = useState([])
     const [electronics, setElectronics] = useState([])

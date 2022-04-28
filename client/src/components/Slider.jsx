@@ -11,10 +11,12 @@ import favpngpant1 from '../img/favpngpant1.png';
 const Container = style.div`
 display: flex;
 width: 100%;
+margin: 90px 0 0 0;
 position: relative;
 height: 100vh;
 background-color: rgba(${props => props.backgroundColor},0.2);
-overflow: hidden;` 
+overflow: hidden;
+// z-index: -1;` 
 
 const Arrow = style.div`
 display: flex;

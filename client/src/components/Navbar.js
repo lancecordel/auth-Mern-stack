@@ -9,16 +9,19 @@ import SearchResults from './SearchResults'
 
 
 const Container = styled.div`
+  position: fixed;
   display: flex; 
+  width: 100%;
   align-items: center;
   justify-content: space-between; 
   // background-color: beige; 
   padding: 10px 20px 10px 20px;
   // border-bottom: 3px solid gold;
+  background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 5px 5px 5px rgba(0, 0, 0, .2);
   // height: 50px;
+  z-index: 5;
   `
-
 const Wrapper = styled.div`
   width: 100%;
   margin-top: 10px;`
@@ -60,7 +63,6 @@ const MenuItemContainer= styled.div`
 
   const Results = styled.div`
   display: flex;
-
   width: 100%;
   // height: 100%;
   // padding: 200px 30px 0 30px;
@@ -99,7 +101,7 @@ function Navbar(props) {
   function handleAdminClick(event){
     const val = event.target.getAttribute('value').toLowerCase();
     // console.log('clicked',val)
-    navigate(`/${val}`)
+    navigate(`/admin/${val}`)
   }
   function handleRegisterClick(event){
     const val = event.target.getAttribute('value').toLowerCase();

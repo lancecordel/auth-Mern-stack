@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { boolean } = require('webidl-conversions');
 const Schema  = mongoose.Schema;
 
-const UserSchema = new Schema(
+const DuplicateUserSchema = new Schema(
     {
         // change back to unique: true
         username: {type: String},
@@ -21,5 +21,5 @@ const UserSchema = new Schema(
     // }
 );
 
-module.exports = mongoose.model("User", UserSchema)
+module.exports = mongoose.model("DuplicateUser", DuplicateUserSchema)
 

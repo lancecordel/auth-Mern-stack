@@ -83,7 +83,6 @@ border: 2px solid;
 
 function Item() {
   const[item, setItem] = useState([]);
-
   const { product } = useParams();
   console.log(product)
   
@@ -91,14 +90,25 @@ function Item() {
     try{
       const products = await axios.get("https://fakestoreapi.com/products")
       const { data } = products;
+      // console.log(data)
       const selectItem = data.filter(item => item.id === parseInt(product))
       setItem(selectItem);
     } catch(err) {
       console.error('error', err.message)
+    }    
+  }
+  async function fetchMongoData(){
+    try{
+      const response = await axios.get('http://localhost:3000/items')
+      const {data} = response;
+      console.log('mongo items',data)
+    } catch(err){
+      console.log(err)
     }
   }
   useEffect(()=> {
       fetchData();
+      fetchMongoData();
       console.log("loading")
   },[])
 

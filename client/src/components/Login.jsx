@@ -26,7 +26,6 @@ width: 590px;
 // border: 1px solid blue;
 `
 const TermsDiv = styled.div`
-
 background-color: rgba(6, 26, 239,.5)
 `
 const Title = styled.p`
