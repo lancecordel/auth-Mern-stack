@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import favadmin from '../img/favadmin.png'
 
@@ -20,19 +20,10 @@ align-items: center;
 flex-direction: column;
 justify-content: space-between;
 background-color: rgba(255,255,255,0.6);
-width: 250px;
+width: 500px;
 // height: 350px;
 // padding: 20px;
 border: 1px solid blue;
-`
-const Terms = styled.div`
-padding: 15px 7px 15px 14px;
-font-size: 11px;
-color: white;
-`
-const TermsDiv = styled.div`
-
-background-color: rgba(6, 26, 239,.7)
 `
 const Title = styled.p`
 color: white;
@@ -62,30 +53,50 @@ display: flex;
 flex-direction: column;
 padding: 10px 0 0 0;
 width: 100%;
+// border: 3px solid;
 align-Items: center;
+`
+const Add = styled.div`
+width: 100%;
+`
+const Remove = styled.div`
+width: 100%;
+`
+const Update = styled.div`
+width: 100%;
+`
+const OptionSelector = styled.div`
+width: 60%;
+padding: 20px 0 20px 0;
+align-items: center;
+`
+const Select = styled.select`
+padding: 5px;
+`
+const JustAdded = styled.div`
+display:flex;
+flex-direction: column;
+align-items: left;
+justify content: center;
+padding-left: 70px;
+line-height: .2px;
 `
 
 function Admin() {
 
-  const [username, setUserName] = useState('');
-  const [size, setsize] = useState('');
-  const [color, setcolor] = useState('');
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
-  const [price, setPrice] = useState('');
-  const [item, setItem] = useState('');
+  const [CRUD, setCRUD] = useState('CHOOSE OPTION');
+  const [createdItem, setCreatedItem] = useState(undefined);
   const [input, setInput] = useState({
     category: '',
     size: '',
-    // color: '',
-    // title: '',
-    // description: '',
-    // image: '',
-    // price: '',
+    color: '',
+    title: '',
+    description: '',
+    image: '',
+    price: '',
   });
   
-
+  //  PrevStat take current state and adds to it
   function handleChange(e){
     const {name, value} = e.target;
     setInput(prevInput => {
@@ -96,51 +107,178 @@ function Admin() {
     })
   }
 
-  const handleSubmitClick = async(e) => {
+  const handleAddClick = async(e) => {
     e.preventDefault();
     const newProduct = {
       category: input.category,
       size: input.size,
-      // color: input.color,
-      // title: input.title,
-      // description: input.description,
-      // image: input.image,
-      // price: input.price
+      color: input.color,
+      title: input.title,
+      description: input.description,
+      image: input.image,
+      price: input.price
     }
 
-    await axios.post('http://localhost:3000/admin/items', newProduct);
-
-    // console.log(input)
-    //     axios({
-    //     // url: `http://localhost:3000/api/items`,
-    //     url: `/items`,
-    //     method: 'POST',
-    //     data: newProduct,
-    // }).then(res => setInput(res.data.newProduct)).catch(console.error)
-    // .then(res => setItem(res.data.item)).catch(console.error);
-    // const response = await axios.get('/');
-    // console.log(response)
+    // ADD SINGLE ITEM
+        await axios({
+        // url: `http://localhost:3000/api/items`,
+        url: `http://localhost:3000/admin/items`,
+        method: 'POST',
+            data: newProduct,
+        }).then(res => setCreatedItem(res.data)).catch(console.error)
   }
 
+  //  REMOVE
+  const handleRemoveClick = async(e) => {
+    e.preventDefault();
+    const newProduct = {
+      category: input.category,
+      size: input.size,
+      color: input.color,
+      title: input.title,
+      description: input.description,
+      image: input.image,
+      price: input.price
+    }
 
+    // REMOVE SINGLE ITEM
+        await axios({
+        // url: `http://localhost:3000/api/items`,
+        url: `http://localhost:3000/admin/items`,
+        method: 'POST',
+            data: newProduct,
+        }).then(res => setCreatedItem(res.data)).catch(console.error)
+  }
+
+  //  UPDATE
+  const handleUpdateClick = async(e) => {
+    e.preventDefault();
+    const newProduct = {
+      category: input.category,
+      size: input.size,
+      color: input.color,
+      title: input.title,
+      description: input.description,
+      image: input.image,
+      price: input.price
+    }
+
+    // UPDATE SINGLE ITEM
+        await axios({
+        // url: `http://localhost:3000/api/items`,
+        url: `http://localhost:3000/admin/items`,
+        method: 'POST',
+            data: newProduct,
+        }).then(res => setCreatedItem(res.data)).catch(console.error)
+  }
+
+    // CHOOSE CRUD OPERATION
+    function handleAdminSelect(e){
+      const optionSelected = e.target.value;
+      setCRUD(optionSelected);
+  }
+
+  console.log(CRUD)
+
+  
+useEffect(()=>{
+  console.log(createdItem)
+},[createdItem])
   return (
     <Container background={favadmin}>
         <RegisterDiv>
-          <TitleDiv>
+        <TitleDiv>
             <Title>MANAGE INVENTORY</Title>
           </TitleDiv>
-          <Form>
-                <Input type='text' name='category' placeholder='category' value={input.category} onChange={handleChange} />
-                <Input type='text' name='size' placeholder='size' value={input.size} onChange={handleChange} />
-                <Input type='text' name='color' placeholder='color' value={input.color} onChange={handleChange} />
-                <Input type='text' name='title' placeholder='title' value={input.title} onChange={handleChange} />
-                <Input type='text' name='description' placeholder='description' value={input.description} onChange={handleChange} />
-                <Input type='number' name='price' placeholder='price' value={input.price} onChange={handleChange} />
-                <RegisterButton onClick={handleSubmitClick} >ADD INVENTORY</RegisterButton>
-            </Form>
+          <OptionSelector>
+            <Form>
+                <Select  onChange={handleAdminSelect} >
+                  <option value={null}>CHOOSE OPTION</option>
+                  <option value="add">ADD INVENTORY</option>
+                  <option value="remove">REMOVE INVENTORY</option>
+                  <option value="update">UPDATE INVENTORY</option>
+                </Select>           
+              </Form>
+            </OptionSelector>
+
+            {/* SELECT CRUD OPERATION */}
+
+              { CRUD === 'add' ? 
+              <Add>
+                  { 
+                  typeof createdItem == 'undefined' ? 
+                  <Form>
+                  <Select name={'category'} placeholder={'choose a category'} value={input.category} onChange={handleChange} >
+                    <p></p>
+                    <option value={null}>CHOOSE A CATEGORY</option>
+                    <option value="womens">womens</option>
+                    <option value="mens">mens</option>
+                    <option value="electronics">electronics</option>
+                    <option value="jewelry">jewelry</option>
+                  </Select>           
+                    {/* <Input type='text' name='category' placeholder='category' value={input.category} onChange={handleChange} /> */}
+                    <Input type='text' name='size' placeholder='size' value={input.size} onChange={handleChange} />
+                    <Input type='text' name='color' placeholder='color' value={input.color} onChange={handleChange} />
+                    <Input type='text' name='title' placeholder='title' value={input.title} onChange={handleChange} />
+                    <Input type='text' name='description' placeholder='description' value={input.description} onChange={handleChange} />
+                    <Input type='number' name='price' placeholder='price' value={input.price} onChange={handleChange} />
+                    <RegisterButton onClick={handleAddClick} >ADD INVENTORY</RegisterButton>
+                </Form>
+                  : 
+                  <JustAdded> 
+                  <p>JUST ADDED</p>
+                  
+                  <p>id: {createdItem.item._id}</p>
+                  <p>category: &nbsp; {createdItem.item.category}</p>
+                  <p>title: &nbsp; {createdItem.item.title}</p>
+                  <p>description: &nbsp; {createdItem.item.description}</p>
+                  <p>size: &nbsp; {createdItem.item.size}</p>
+                  <p>${createdItem.item.price}</p>
+                  <button>GO TO LISTING</button>
+                </JustAdded>
+                  }
+                </Add>
+
+                :  '' }
+              { CRUD === 'remove' ? 
+              <Remove>
+              <Form>     
+                    {/* <Input type='text' name='category' placeholder='category' value={input.category} onChange={handleChange} /> */}
+                    <p><b>DELETE BY ID</b></p>
+                    <Input type='text' name='size' placeholder='enter ID number' value={input.size} onChange={handleChange} />
+                    <RegisterButton onClick={handleRemoveClick} >REMOVE INVENTORY</RegisterButton>
+
+                </Form>
+                </Remove>
+              
+              :  '' }
+
+              { CRUD === 'update' ? 
+              <Update>
+              <Form>        
+                    <Input type='text' name='id' placeholder='ENTER ID# TO UPDATE' value={input.category} onChange={handleChange} />
+                    <Input type='text' name='size' placeholder='size' value={input.size} onChange={handleChange} />
+                    <Input type='text' name='color' placeholder='color' value={input.color} onChange={handleChange} />
+                    <Input type='text' name='title' placeholder='title' value={input.title} onChange={handleChange} />
+                    <Input type='text' name='description' placeholder='description' value={input.description} onChange={handleChange} />
+                    <Input type='number' name='price' placeholder='price' value={input.price} onChange={handleChange} />
+                    <RegisterButton onClick={handleUpdateSubmit} >UPDATE INVENTORY</RegisterButton>
+                </Form>
+                </Update>
+                :  ''
+              }
+
+
+
+
         </RegisterDiv>
     </Container>
   )
 }
 
+
+
+
 export default Admin
+
+

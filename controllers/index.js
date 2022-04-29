@@ -12,7 +12,7 @@ const createItem = async (req, res) => {
           item,
         }) 
     } catch (error) {
-        return res.status(500).json({error: error.message})
+        return res.status(500).json({'error': error.message})
     }
 }
 // create User
@@ -97,6 +97,19 @@ const deleteAllUsers = async (req, res) => {
     }
 }
 
+const deleteAllItems = async (req, res) => {
+    try {
+        // const {id} = req.params
+        const deleted = await Product.deleteMany()
+        if(deleted){
+            return res.status(200).send('All Items Deleted')
+        }
+        throw new Error('Item Not Found!')
+    } catch (error) {
+        return res.status(500).send(error.message)
+    }
+}
+
 const deleteItem = async (req, res) => {
     try {
         const {id} = req.params
@@ -115,6 +128,7 @@ module.exports = {
     createUser,
     createDuplicateUser,
     deleteAllUsers,
+    deleteAllItems,
     getAllItems,
     getItemById,
     updateItem,

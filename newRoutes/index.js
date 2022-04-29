@@ -19,5 +19,6 @@ router.put('/items/:id', controllers.updateItem)
 
 router.delete('/items/:id', controllers.deleteItem)
 router.delete('/users', controllers.deleteAllUsers)
+router.delete('/admin/items', controllers.deleteAllItems)
 
 module.exports = router

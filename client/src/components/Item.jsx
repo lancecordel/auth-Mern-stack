@@ -64,7 +64,7 @@ background-color: white;
 border-radius: 15px;
 `
 const Img = styled.img`
-width: 80%;
+width: 60%;
 
 `
 const SelectDiv = styled.div`
@@ -123,7 +123,7 @@ function Item() {
                     <Img src={item.image} alt={'item'}/>
                   </ImageDiv>
                   <ItemDescription>
-                    <h2>{item.title}</h2>
+                    <h1>{item.title}</h1>
                     <p>{item.description}</p>
                     <PriceDiv>
                      <p>${item.price}</p>

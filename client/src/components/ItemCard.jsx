@@ -17,7 +17,7 @@ padding: 10px;
 // border: 1px solid;
 max-width: 400px;
 // width: 30%;
-height: 90%;
+height: 50%;
 `
 const ItemTitle = styled.div`
 display: flex;

@@ -21,11 +21,12 @@ margin-top: 50px;
 const ImageDiv = styled.div`
 flex: 1;
 display: flex;
+align-items: top;
 justify-content: center;
 padding: 10px;
 // border: 1px solid;
 // width: 10%;
-height: 60%;
+height: 80%;
 `
 
 function Jewelry() {

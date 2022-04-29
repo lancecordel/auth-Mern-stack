@@ -9,11 +9,11 @@ const Container = styled.div`
 // flex: 1;
 display: flex;
 flex-wrap: wrap;
-align-items: center;
+align-items: top;
 justify-content: center;
 // border: 6px solid;
 width: 95vw;
-height: 90vh;
+// height: 90vh;
 margin: 20px;`
 
 const ImageDiv = styled.div`
@@ -23,7 +23,15 @@ justify-content: center;
 padding: 10px;
 // border: 1px solid;
 // width: 30%;
-height: 100%;`
+height: 90%;`
+
+// const Wrapper = styled.div`
+// width: 90%;
+// display: flex;
+// height: 70vh;
+// flex-wrap: wrap;
+// border: 3px solid green;
+// `
 
 function Womens() {
     const navigate = useNavigate();    
@@ -53,7 +61,8 @@ function Womens() {
     <div>
         <Categories />
         <Container>
-            { womens.map(item => {
+          {/* <Wrapper> */}
+          { womens.map(item => {
                 return(
                   <ImageDiv>
                     <ItemCard 
@@ -66,6 +75,8 @@ function Womens() {
                 )
             })
         }
+          {/* </Wrapper> */}
+
         </Container>
     </div>
   )

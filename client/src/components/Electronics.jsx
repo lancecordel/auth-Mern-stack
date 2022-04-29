@@ -24,7 +24,7 @@ justify-content: center;
 padding: 10px;
 // border: 1px solid;
 // width: 30%;
-height: 60%;`
+height: 90%;`
 
 const Wrapper = styled.div`
 display: flex;
