@@ -15,6 +15,7 @@ background-image: linear-gradient(rgba(255,255,255,0.5),rgba(255, 255, 255,0.5))
 background-size: cover;
 `
 const RegisterDiv = styled.div`
+flex: .5;
 display: flex;
 align-items: center;
 flex-direction: column;
@@ -75,17 +76,84 @@ padding: 5px;
 `
 const JustAdded = styled.div`
 display:flex;
+// font-weight: bold;
 flex-direction: column;
-align-items: left;
-justify content: center;
-padding-left: 70px;
-line-height: .2px;
+align-items: center;
+justify-content: center;
+padding: 20px 50px 20px 50px;
+// line-height: 2px;
+`
+const InfoNameTop = styled.div`
+flex: 1;
+min-width: 50%;
+text-align: right;
+font-weight: bold;
+
+padding: 0 20px 10px 0;
+// border: 1px solid;
+`
+const InfoDetailTop = styled.div`
+flex: 1;
+min-width: 50%;
+text-align: left;
+// border: 1px solid;
+`
+const InfoNameBottom = styled.div`
+flex: 1;
+min-width: 50%;
+text-align: right;
+font-weight: bold;
+padding: 0 20px 10px 0;
+// border: 1px solid;
+`
+const InfoDetailBottom = styled.div`
+flex: 1;
+min-width: 50%;
+text-align: left;
+// border: 1px solid;
+`
+const NameDetailTopContainer = styled.div`
+display: flex;
+width: 100%;
+`
+const NameDetailBottomContainer = styled.div`
+display: flex;
+width: 100%;
+`
+const Description = styled.div`
+display: flex;
+align-items: top;
+width: 100%;
+// justify-content: space-between;
+// border: 1px solid;
+`
+const DescripInfo = styled.div`
+flex: 1;
+text-align: right;
+font-weight: bold;
+padding: 0 20px 10px 0;
+min-width: 50%;
+`
+const DescripDetail = styled.div`
+flex: 1;
+text-align: left;
+min-width: 50%;
+// border: 1px solid;
+`
+const InfoDetailWrapper = styled.div`
+width: 100%;
+display: flex;
+flex-direction: column;
+text-align: center;
+align-items: center;
+// border: 1px solid;
 `
 
 function Admin() {
 
   const [CRUD, setCRUD] = useState('CHOOSE OPTION');
   const [createdItem, setCreatedItem] = useState(undefined);
+  const [updatedItem, setUpdatedItem] = useState(false);
   const [input, setInput] = useState({
     category: '',
     size: '',
@@ -151,9 +219,9 @@ function Admin() {
   }
 
   //  UPDATE
-  const handleUpdateClick = async(e) => {
+  const handleUpdateSubmit = async(e) => {
     e.preventDefault();
-    const newProduct = {
+    const updateProduct = {
       category: input.category,
       size: input.size,
       color: input.color,
@@ -166,10 +234,10 @@ function Admin() {
     // UPDATE SINGLE ITEM
         await axios({
         // url: `http://localhost:3000/api/items`,
-        url: `http://localhost:3000/admin/items`,
-        method: 'POST',
-            data: newProduct,
-        }).then(res => setCreatedItem(res.data)).catch(console.error)
+        url: `http://localhost:3000/admin/items/update`,
+        method: 'PUT',
+          data: updateProduct,
+        }).then(res => setUpdatedItem(true)).catch(console.error)
   }
 
     // CHOOSE CRUD OPERATION
@@ -192,7 +260,7 @@ useEffect(()=>{
           </TitleDiv>
           <OptionSelector>
             <Form>
-                <Select  onChange={handleAdminSelect} >
+                <Select onChange={handleAdminSelect} >
                   <option value={null}>CHOOSE OPTION</option>
                   <option value="add">ADD INVENTORY</option>
                   <option value="remove">REMOVE INVENTORY</option>
@@ -226,15 +294,45 @@ useEffect(()=>{
                 </Form>
                   : 
                   <JustAdded> 
-                  <p>JUST ADDED</p>
-                  
-                  <p>id: {createdItem.item._id}</p>
-                  <p>category: &nbsp; {createdItem.item.category}</p>
-                  <p>title: &nbsp; {createdItem.item.title}</p>
-                  <p>description: &nbsp; {createdItem.item.description}</p>
-                  <p>size: &nbsp; {createdItem.item.size}</p>
-                  <p>${createdItem.item.price}</p>
-                  <button>GO TO LISTING</button>
+                  <InfoDetailWrapper>
+
+                  <p>{createdItem.item.title} ADDED TO INVENTORY</p>
+                  {/* <span>id:</span> */}
+                  <span><b>ID# {createdItem.item._id}</b></span>
+                  <NameDetailTopContainer>
+                  <InfoNameTop>
+                  <p>category:</p>
+                  <p>title:</p>
+                  </InfoNameTop>
+                  <InfoDetailTop>
+                  <p>{createdItem.item.category}</p>
+                  <p>{createdItem.item.title}</p>
+                  </InfoDetailTop>
+                  </NameDetailTopContainer>
+
+                  <Description>
+                    <DescripInfo>
+                    <span>description:</span>
+                    </DescripInfo>
+                    <DescripDetail>
+                    <span>{createdItem.item.description}</span>
+                    </DescripDetail>
+                  </Description>
+
+                  <NameDetailBottomContainer>
+                  <InfoNameBottom>
+                  <p>size:</p>
+                  <p>price</p>
+                  </InfoNameBottom>                    
+                  <InfoDetailBottom>
+                  <p>{createdItem.item.size}</p>
+                  <p>{createdItem.item.price}</p>
+                  </InfoDetailBottom>
+                  </NameDetailBottomContainer>
+
+                  </InfoDetailWrapper>
+          
+                  {/* <button>GO TO LISTING</button> */}
                 </JustAdded>
                   }
                 </Add>

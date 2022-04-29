@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URL).
-then(()=>console.log(`Successfully Connected to MongoDB ${process.env.PORT}`)).catch((err) => console.log(err))
+then(()=>console.log(`Successfully Connected to MongoDB `)).catch((err) => console.log(err))
 
 const db = mongoose.connection;
 
