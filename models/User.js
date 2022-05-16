@@ -5,8 +5,8 @@ const Schema  = mongoose.Schema;
 const UserSchema = new Schema(
     {
         // change back to unique: true
-        username: {type: String},
-        email: {type: String},
+        username: {type: String, required: true, unique: true},
+        email: {type: String, required: true, unique: true},
         password: {type: String, required: true},
         isAdmin:{
             type: Boolean,

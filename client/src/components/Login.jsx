@@ -70,17 +70,6 @@ function Login() {
     email: '',
     password: ''
   });
-  
-  // function handleChange(e){
-  //   const {name, value} = e.target;
-  //   setInput(prevInput => {
-  //     return {
-  //       ...prevInput,
-  //       [name]: value
-  //     }
-  //   })
-  // }
-
 
   const submitHandler = async(e) => {
     e.preventDefault();
@@ -97,11 +86,6 @@ function Login() {
       
     })
 
-
-
-
-
-
   }
 
   return (
@@ -115,7 +99,6 @@ function Login() {
                 <Input type='text' name='email'  placeholder='email' value={input.email} onChange={(e)=>setEmail(e.target.value)} />
                 <Input type='text' name='password' placeholder='password' value={input.password} onChange={(e)=>setPassword(e.target.value)} />
                 <SignInButton onClick={submitHandler} >SIGN IN</SignInButton>
-                {/* {console.log(userName, password)} */}
           </Form>
 
   
@@ -129,53 +112,3 @@ function Login() {
 
 export default Login
 
-// var axios = require('axios');
-// var data = JSON.stringify({
-//     "collection": "users",
-//     "database": "shop",
-//     "dataSource": "Cluster0",
-//     "projection": {
-//         "_id": 1
-//     }
-// });
-            
-// var config = {
-//     method: 'post',
-//     url: 'https://data.mongodb-api.com/app/data-sjhoa/endpoint/data/beta/action/findOne',
-//     headers: {
-//         'Content-Type': 'application/json',
-//         'Access-Control-Request-Headers': '*',
-//         'api-key': '0gzyMue6VeONxxdWRTwVDLQtw5EFicz26YLtnHtzo3dwEJ6CsFDULdVibuNeVEVc'
-//     },
-//     data : data
-// };
-            
-// axios(config)
-//     .then(function (response) {
-//         console.log(JSON.stringify(response.data));
-//     })
-//     .catch(function (error) {
-//         console.log(error);
-//     });
-
-
-//     // console.log(input)
-//     //POST request with body equal on data in JSON format
-//     const data = {}
-
-//   await fetch('/authorize/login', {
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/json',
-//   },
-//   body: JSON.stringify(),
-// })
-// .then((response) => response.json())
-// //Then with the data from the response in JSON...
-// .then((data) => {
-//   console.log('Success:', console);
-// })
-// //Then with the error genereted...
-// .catch((error) => {
-//   console.error('Error:', error);
-// });

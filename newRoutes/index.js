@@ -5,12 +5,14 @@ const router = Router()
 router.get('/', (req, res) => res.send('This is the root!'))
 // create PRODUCT
 router.post('/admin/items', controllers.createItem)
-// router.post('/users/register', controllers.createUser)
+router.post('/users/register', controllers.createUser)
 
 // DUPLICATE USER CREATOR, use above for UNIQUE USER
-router.post('/users/register', controllers.createDuplicateUser)
+// router.post('/users/register', controllers.createDuplicateUser)
 
 router.get('/items', controllers.getAllItems)
+router.get('/users/:id', controllers.getUserById)
+router.get('/users', controllers.getAllUsers)
 
 
 router.get('/items/:id', controllers.getItemById)

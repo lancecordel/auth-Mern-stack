@@ -1,6 +1,4 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
 import Categories from './Categories'
 import styled from 'styled-components';
 import ItemCard from './ItemCard';
@@ -17,7 +15,6 @@ height: 90vh;
 margin: 20px;
 margin-top: 50px;
 `
-
 const ImageDiv = styled.div`
 flex: 1;
 display: flex;
@@ -27,16 +24,7 @@ padding: 10px;
 // width: 10%;
 height: 60%;
 `
-
 function SearchResults(props) {
-    const navigate = useNavigate();    
-    const [info, setInfo] = useState([])
-    const [results, setResults] = useState([])
-    console.log(props.results)
-
-
-
-
     useEffect(()=> {
     },[])
 
@@ -44,7 +32,6 @@ function SearchResults(props) {
     <div>
         <Categories />
         <Container>
-            {/* <Wrapper> */}
             { props.results.map(item => {
                 return(
                   <ImageDiv>
@@ -57,7 +44,6 @@ function SearchResults(props) {
                 )
             })
         }
-            {/* </Wrapper> */}
 
         </Container>
         <h1>Womens Page</h1>

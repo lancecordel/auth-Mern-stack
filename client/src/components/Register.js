@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import favpngregister from '../img/favpngregister.png'
 import favregister from '../img/favregister.png';
 
-
 const Container = styled.div`
 flex: 1;
 display: flex;
@@ -35,7 +34,6 @@ font-size: 11px;
 color: white;
 `
 const TermsDiv = styled.div`
-
 background-color: rgba(6, 26, 239,.7)
 `
 const Title = styled.p`
@@ -68,19 +66,15 @@ padding: 10px 0 0 0;
 width: 100%;
 align-Items: center;
 `
-
 function Register() {
   const navigate = useNavigate();
-
-  const [username, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [createUser, setCreateUser] = useState('');
+  const [createUserInfo, setCreateUserInfo] = useState('');
+  const [confirmUserCreation, setConfirmUserCreation] = useState(false);
   const [input, setInput] = useState({
     username: '',
     email: '',
     password: ''
-  });
+  }); 
   
 
   function handleChange(e){
@@ -100,22 +94,34 @@ function Register() {
       email: input.email,
       password: input.password
     }
-    // console.log('before axios',createUser)
 
-   await axios.post('http://localhost:3000/users/register', newUser)
-   setCreateUser(newUser);
+   await axios.post('http://localhost:3000/users/register', newUser).then(()=> setConfirmUserCreation(true));
+   setCreateUserInfo(newUser);
   }
   useEffect(() => {
-    if(createUser){ 
-      console.log('after axios',createUser)
-      // navigate('/');
+    if(createUserInfo){ 
+      console.log('after axios',createUserInfo)
      }
 
-  },[createUser, navigate])
+  },[createUserInfo, navigate])
+
 
   return (
     <Container background={favpngregister}>
+
+        { 
+
+        confirmUserCreation ?   
+        
         <RegisterDiv>
+          <TitleDiv>
+              <Title>USER CREATED</Title>
+          </TitleDiv>
+        </RegisterDiv>
+        
+        :  
+        (
+        <RegisterDiv>          
           <TitleDiv>
             <Title>CREATE AN ACCOUNT</Title>
           </TitleDiv>
@@ -136,6 +142,10 @@ function Register() {
                 </TermsDiv>
 
         </RegisterDiv>
+              )
+
+            }
+
     </Container>
   )
 }

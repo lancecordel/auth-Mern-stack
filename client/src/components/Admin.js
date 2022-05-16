@@ -6,6 +6,8 @@ import favadmin from '../img/favadmin.png'
 const Container = styled.div`
 flex: 1;
 display: flex;
+position: fixed;
+top: 80px;
 align-items: center;
 justify-content: center;
 width: 100vw;
@@ -241,8 +243,6 @@ function Admin() {
      image: item.image,
      price: item.price
     })
-    // console.log(item)
-    // console.log(validData);
   }
 
   const handleUpdateSubmit = async(e) => {
@@ -305,7 +305,6 @@ useEffect(()=>{
                     <option value="electronics">electronics</option>
                     <option value="jewelry">jewelry</option>
                   </Select>           
-                    {/* <Input type='text' name='category' placeholder='category' value={input.category} onChange={handleChange} /> */}
                     <Input type='text' name='size' placeholder='size' value={input.size} onChange={handleChange} />
                     <Input type='text' name='color' placeholder='color' value={input.color} onChange={handleChange} />
                     <Input type='text' name='title' placeholder='title' value={input.title} onChange={handleChange} />
@@ -319,7 +318,6 @@ useEffect(()=>{
                   <InfoDetailWrapper>
 
                   <p>{createdItem.item.title} ADDED TO INVENTORY</p>
-                  {/* <span>id:</span> */}
                   <span><b>ID# {createdItem.item._id}</b></span>
                   <NameDetailTopContainer>
                   <InfoNameTop>

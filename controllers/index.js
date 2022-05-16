@@ -28,18 +28,43 @@ const createUser = async (req, res) => {
     }
 }
 
-//  NO UNIQUE users TEST
-const createDuplicateUser = async (req, res) => {
+// get User By Id
+const getUserById = async (req, res) => {
     try {
-        const duplicateuser = await new DuplicateUser(req.body);
-        await duplicateuser.save()
+        const id = req.params;
+        const user = await User.findById(id);
         return res.status(201).json({
-          duplicateuser,
+          user,
         }) 
     } catch (error) {
         return res.status(500).json({error: error.message})
     }
 }
+
+// get All Users
+const getAllUsers = async (req, res) => {
+    try {
+        const user = await User.find();
+        return res.status(201).json({
+          user,
+        }) 
+    } catch (error) {
+        return res.status(500).json({error: error.message})
+    }
+}
+
+// //  NO UNIQUE users TEST
+// const createDuplicateUser = async (req, res) => {
+//     try {
+//         const duplicateuser = await new DuplicateUser(req.body);
+//         await duplicateuser.save()
+//         return res.status(201).json({
+//           duplicateuser,
+//         }) 
+//     } catch (error) {
+//         return res.status(500).json({error: error.message})
+//     }
+// }
 
 // GET ALL ITEMS
 const getAllItems = async (req, res) => {
@@ -56,7 +81,6 @@ const getItemById = async (req,res) => {
     try {
         const {id} = req.params
         const item = await Product.findById(id)
-        console.log(item)
         if(item){
             return res.status(200).json({item})
         }
@@ -72,14 +96,17 @@ const updateItem = (req, res) => {
         Product.findByIdAndUpdate(id, req.body, { new: true }, (err, item) => {
             if(err){
                 res.status(500).send(err)
+                return;
             }
             if(!item){
                 res.status(500).send('Item not found!')
+                return;
             }
             return res.status(200).json(item)
         })
     } catch (error) {
-        return res.status(500).send(error.message)
+        res.status(500).send(error.message)
+        return;
     }
 }
 
@@ -126,7 +153,9 @@ const deleteItem = async (req, res) => {
 module.exports = {
     createItem,
     createUser,
-    createDuplicateUser,
+    getUserById,
+    getAllUsers,
+    // createDuplicateUser,
     deleteAllUsers,
     deleteAllItems,
     getAllItems,
